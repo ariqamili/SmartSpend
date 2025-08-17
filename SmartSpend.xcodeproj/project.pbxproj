@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EEA8CC902E52335900089C13 /* AuthLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC8F2E52335900089C13 /* AuthLoadingView.swift */; };
+		EEA8CC942E52363B00089C13 /* AppleAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC932E52363B00089C13 /* AppleAuthView.swift */; };
+		EEA8CC962E52369500089C13 /* AppleAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC952E52369500089C13 /* AppleAuthViewModel.swift */; };
+		EEA8CC982E52372300089C13 /* ProviderToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC972E52372300089C13 /* ProviderToken.swift */; };
+		EEA8CC9A2E52375100089C13 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC992E52375100089C13 /* AuthConstants.swift */; };
+		EEA8CC9C2E52379300089C13 /* CryptoNonce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC9B2E52379300089C13 /* CryptoNonce.swift */; };
+		EEA8CC9E2E5237CD00089C13 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC9D2E5237CD00089C13 /* KeychainHelper.swift */; };
+		EEA8CCA02E5237F600089C13 /* AppleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC9F2E5237F600089C13 /* AppleAuthService.swift */; };
+		EEA8CCA22E523ADB00089C13 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CCA12E523ADB00089C13 /* AuthCoordinator.swift */; };
+		EEA8CCA42E523B0900089C13 /* AuthNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CCA32E523B0900089C13 /* AuthNetworking.swift */; };
 		EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */; };
 		EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */; };
 		EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */; };
@@ -14,6 +24,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EEA8CC8F2E52335900089C13 /* AuthLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLoadingView.swift; sourceTree = "<group>"; };
+		EEA8CC932E52363B00089C13 /* AppleAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthView.swift; sourceTree = "<group>"; };
+		EEA8CC952E52369500089C13 /* AppleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthViewModel.swift; sourceTree = "<group>"; };
+		EEA8CC972E52372300089C13 /* ProviderToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderToken.swift; sourceTree = "<group>"; };
+		EEA8CC992E52375100089C13 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
+		EEA8CC9B2E52379300089C13 /* CryptoNonce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoNonce.swift; sourceTree = "<group>"; };
+		EEA8CC9D2E5237CD00089C13 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		EEA8CC9F2E5237F600089C13 /* AppleAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthService.swift; sourceTree = "<group>"; };
+		EEA8CCA12E523ADB00089C13 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		EEA8CCA32E523B0900089C13 /* AuthNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworking.swift; sourceTree = "<group>"; };
 		EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSpend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSpendApp.swift; sourceTree = "<group>"; };
 		EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +52,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EEA8CC872E5231AD00089C13 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8CC882E5231C600089C13 /* Auth */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		EEA8CC882E5231C600089C13 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8CC8C2E5232CF00089C13 /* Services */,
+				EEA8CC8B2E5232BF00089C13 /* Models */,
+				EEA8CC8A2E5232A500089C13 /* ViewModels */,
+				EEA8CC892E5231D700089C13 /* Views */,
+				EEA8CC992E52375100089C13 /* AuthConstants.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		EEA8CC892E5231D700089C13 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8CC8F2E52335900089C13 /* AuthLoadingView.swift */,
+				EEA8CC932E52363B00089C13 /* AppleAuthView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EEA8CC8A2E5232A500089C13 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8CC952E52369500089C13 /* AppleAuthViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EEA8CC8B2E5232BF00089C13 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8CC972E52372300089C13 /* ProviderToken.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EEA8CC8C2E5232CF00089C13 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EEA8CC9B2E52379300089C13 /* CryptoNonce.swift */,
+				EEA8CC9D2E5237CD00089C13 /* KeychainHelper.swift */,
+				EEA8CC9F2E5237F600089C13 /* AppleAuthService.swift */,
+				EEA8CCA12E523ADB00089C13 /* AuthCoordinator.swift */,
+				EEA8CCA32E523B0900089C13 /* AuthNetworking.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		EEB321D12E4CCA7200BD4E77 = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +128,7 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				EEA8CC872E5231AD00089C13 /* Features */,
 				EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */,
 				EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */,
 				EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */,
@@ -137,8 +215,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEA8CC9C2E52379300089C13 /* CryptoNonce.swift in Sources */,
+				EEA8CC982E52372300089C13 /* ProviderToken.swift in Sources */,
+				EEA8CC902E52335900089C13 /* AuthLoadingView.swift in Sources */,
+				EEA8CC962E52369500089C13 /* AppleAuthViewModel.swift in Sources */,
+				EEA8CC9E2E5237CD00089C13 /* KeychainHelper.swift in Sources */,
+				EEA8CCA42E523B0900089C13 /* AuthNetworking.swift in Sources */,
+				EEA8CC942E52363B00089C13 /* AppleAuthView.swift in Sources */,
+				EEA8CCA22E523ADB00089C13 /* AuthCoordinator.swift in Sources */,
 				EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */,
 				EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */,
+				EEA8CCA02E5237F600089C13 /* AppleAuthService.swift in Sources */,
+				EEA8CC9A2E52375100089C13 /* AuthConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
