@@ -8,19 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authVM: AuthenticationViewModel
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        if authVM.isSignedIn {
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
+
+                AddView()
+                    .tabItem {
+                        Label("Add", systemImage: "plus.circle.fill")
+                    }
+
+                AccountView()
+                    .tabItem {
+                        Label("Account", systemImage: "person.crop.circle.fill")
+                    }
+                    
+            }
+        } else {
+            LoginView()
         }
-        .padding()
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(AuthenticationViewModel()) // inject for previews
     }
 }
