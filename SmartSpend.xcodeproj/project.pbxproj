@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7A657E4D2E52760A00B099F1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4C2E52760A00B099F1 /* GoogleSignIn */; };
 		7A657E4F2E52760A00B099F1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4E2E52760A00B099F1 /* GoogleSignInSwift */; };
-		7A657E512E52769B00B099F1 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E502E52769B00B099F1 /* AuthenticationViewModel.swift */; };
-		7A657E552E5276FB00B099F1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E542E5276FB00B099F1 /* LoginView.swift */; };
 		7A657E572E52772400B099F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E562E52772400B099F1 /* HomeView.swift */; };
 		7A657E592E52773700B099F1 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E582E52773700B099F1 /* AddView.swift */; };
 		7A657E5B2E52774800B099F1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E5A2E52774800B099F1 /* AccountView.swift */; };
@@ -22,8 +20,6 @@
 
 /* Begin PBXFileReference section */
 		7A657E4A2E52746100B099F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7A657E502E52769B00B099F1 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
-		7A657E542E5276FB00B099F1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7A657E562E52772400B099F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7A657E582E52773700B099F1 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		7A657E5A2E52774800B099F1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -34,15 +30,31 @@
 		EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7A38C61E2E55BE290030D210 /* Network */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7A38C6272E55ECA20030D210 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		7AC367D02E57595F00424841 /* Auth */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Auth;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		EEB321D72E4CCA7200BD4E77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				7A657E4D2E52760A00B099F1 /* GoogleSignIn in Frameworks */,
 				7A657E4F2E52760A00B099F1 /* GoogleSignInSwift in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -66,14 +78,15 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				7AC367D02E57595F00424841 /* Auth */,
+				7A38C6272E55ECA20030D210 /* Shared */,
+				7A38C61E2E55BE290030D210 /* Network */,
 				7A657E4A2E52746100B099F1 /* Info.plist */,
 				EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */,
 				EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */,
 				7A657E5A2E52774800B099F1 /* AccountView.swift */,
 				7A657E582E52773700B099F1 /* AddView.swift */,
 				7A657E562E52772400B099F1 /* HomeView.swift */,
-				7A657E502E52769B00B099F1 /* AuthenticationViewModel.swift */,
-				7A657E542E5276FB00B099F1 /* LoginView.swift */,
 				EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */,
 				EEB321E32E4CCA7400BD4E77 /* Preview Content */,
 			);
@@ -101,7 +114,10 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
+			fileSystemSynchronizedGroups = (
+				7A38C61E2E55BE290030D210 /* Network */,
+				7A38C6272E55ECA20030D210 /* Shared */,
+				7AC367D02E57595F00424841 /* Auth */,
 			);
 			name = SmartSpend;
 			productName = SmartSpend;
@@ -116,7 +132,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					EEB321D92E4CCA7200BD4E77 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -124,7 +140,6 @@
 				};
 			};
 			buildConfigurationList = EEB321D52E4CCA7200BD4E77 /* Build configuration list for PBXProject "SmartSpend" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -135,6 +150,7 @@
 			packageReferences = (
 				7A657E4B2E52760A00B099F1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = EEB321DB2E4CCA7200BD4E77 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -147,34 +163,28 @@
 /* Begin PBXResourcesBuildPhase section */
 		EEB321D82E4CCA7200BD4E77 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				EEB321E52E4CCA7400BD4E77 /* Preview Assets.xcassets in Resources */,
 				EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EEB321D62E4CCA7200BD4E77 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				7A657E512E52769B00B099F1 /* AuthenticationViewModel.swift in Sources */,
 				EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */,
 				7A657E592E52773700B099F1 /* AddView.swift in Sources */,
-				7A657E552E5276FB00B099F1 /* LoginView.swift in Sources */,
 				7A657E5B2E52774800B099F1 /* AccountView.swift in Sources */,
 				7A657E572E52772400B099F1 /* HomeView.swift in Sources */,
 				EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		EEB321E62E4CCA7400BD4E77 /* Debug */ = {
+		EEB321E62E4CCA7400BD4E77 /* Debug configuration for PBXProject "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -210,6 +220,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -234,7 +245,7 @@
 			};
 			name = Debug;
 		};
-		EEB321E72E4CCA7400BD4E77 /* Release */ = {
+		EEB321E72E4CCA7400BD4E77 /* Release configuration for PBXProject "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,6 +281,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -288,7 +300,7 @@
 			};
 			name = Release;
 		};
-		EEB321E92E4CCA7400BD4E77 /* Debug */ = {
+		EEB321E92E4CCA7400BD4E77 /* Debug configuration for PBXNativeTarget "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -304,6 +316,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,7 +330,7 @@
 			};
 			name = Debug;
 		};
-		EEB321EA2E4CCA7400BD4E77 /* Release */ = {
+		EEB321EA2E4CCA7400BD4E77 /* Release configuration for PBXNativeTarget "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -333,6 +346,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -352,19 +366,17 @@
 		EEB321D52E4CCA7200BD4E77 /* Build configuration list for PBXProject "SmartSpend" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EEB321E62E4CCA7400BD4E77 /* Debug */,
-				EEB321E72E4CCA7400BD4E77 /* Release */,
+				EEB321E62E4CCA7400BD4E77 /* Debug configuration for PBXProject "SmartSpend" */,
+				EEB321E72E4CCA7400BD4E77 /* Release configuration for PBXProject "SmartSpend" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		EEB321E82E4CCA7400BD4E77 /* Build configuration list for PBXNativeTarget "SmartSpend" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EEB321E92E4CCA7400BD4E77 /* Debug */,
-				EEB321EA2E4CCA7400BD4E77 /* Release */,
+				EEB321E92E4CCA7400BD4E77 /* Debug configuration for PBXNativeTarget "SmartSpend" */,
+				EEB321EA2E4CCA7400BD4E77 /* Release configuration for PBXNativeTarget "SmartSpend" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

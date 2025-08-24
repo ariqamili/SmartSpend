@@ -12,6 +12,7 @@ import GoogleSignIn
 @main
 struct SmartSpendApp: App {
     @StateObject var authVM = AuthenticationViewModel()
+    
 
     var body: some Scene {
         WindowGroup {
