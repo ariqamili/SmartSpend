@@ -9,17 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             VStack(spacing: 20) {
-                Text("🚀 Welcome to SmartSpend")
-                    .font(.title)
-                    .fontWeight(.bold)
-
-                NavigationLink("Go to Auth") {
+//                Text("🚀 Welcome to SmartSpend")
+//                    .font(.title)
+//                    .fontWeight(.bold)
+//
+//                NavigationLink("Go to Auth") {
                     AppleAuthView() // <--- your future login screen
-                }
-                .buttonStyle(.borderedProminent)
-            }
+//                }
+//                .buttonStyle(.borderedProminent)
+//            }
+                
+                
             .padding()
         }
     }

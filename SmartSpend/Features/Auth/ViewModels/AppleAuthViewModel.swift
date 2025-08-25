@@ -2,107 +2,112 @@
 //  AppleAuthViewModel.swift
 //  SmartSpend
 //
-//  Created by shortcut mac on 17.8.25.
+//  Created by shortcut mac on 21.8.25.
 //
 
+
+//
+//  AppleAuthViewModel.swift
+//  SmartSpend
+//
+//  Created by shortcut mac on 21.8.25.
+//
+
+
 import Foundation
-import AuthenticationServices
 import SwiftUI
 
 @MainActor
 final class AppleAuthViewModel: ObservableObject {
-    @Published var isLoading = false
-    @Published var errorMessage: String?
-    @Published var isAuthenticated = false
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String? = nil
+    @Published var isAuthenticated: Bool = false
 
     @AppStorage("email") private(set) var email: String = ""
     @AppStorage("firstName") private(set) var firstName: String = ""
     @AppStorage("lastName") private(set) var lastName: String = ""
     @AppStorage("userID") private(set) var userID: String = ""
 
-    private var currentRawNonce: String?
+    private let authService = AppleAuthService()
     private let network: AuthNetworking
 
-    init(networking: AuthNetworking = MockAuthNetworking()) {
+    // Use RemoteAuthNetworking by default (talks to the real backend)
+    init(networking: AuthNetworking = RemoteAuthNetworking()) {
         self.network = networking
+        checkAuthenticationStatus()
     }
 
-    /// Called by the View to get the hashed nonce to set on the Apple request.
-    /// The View will set `request.nonce = vm.prepareNonceForRequest()`
-    func prepareNonceForRequest() -> String {
-        let raw = randomNonceString()
-        currentRawNonce = raw
-        return sha256Hex(raw)
-    }
-
-    /// Called by the View when SignInWithAppleButton's onCompletion fires.
-    /// Pass the Result<ASAuthorization, Error> here.
-    func handleAuthorizationResult(_ result: Result<ASAuthorization, Error>) {
-        Task {
-            await process(result)
+    /// Check if user is already authenticated on app launch
+    private func checkAuthenticationStatus() {
+        if KeychainHelper.standard.read(for: "refresh_token") != nil && !userID.isEmpty {
+            isAuthenticated = true
         }
     }
 
-    private func process(_ result: Result<ASAuthorization, Error>) async {
-        isLoading = true
-        defer { isLoading = false }
-
-        switch result {
-        case .failure(let error):
-            errorMessage = error.localizedDescription
-            return
-
-        case .success(let authorization):
-            guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-                errorMessage = "Unsupported credential"
-                return
-            }
-
-            let userId = credential.user
-            let emailVal = credential.email
-            let given = credential.fullName?.givenName
-            let family = credential.fullName?.familyName
-
-            // Extract identityToken if available
-            var idTokenString: String? = nil
-            if let tokenData = credential.identityToken {
-                idTokenString = String(data: tokenData, encoding: .utf8)
-            }
-            var authCodeString: String? = nil
-            if let codeData = credential.authorizationCode {
-                authCodeString = String(data: codeData, encoding: .utf8)
-            }
-
-            // Build ProviderToken (your model)
-            let providerToken = ProviderToken(
-                provider: "apple",
-                idToken: idTokenString,
-                authorizationCode: authCodeString,
-                rawNonce: currentRawNonce,
-                userID: userId,
-                email: emailVal,
-                givenName: given,
-                familyName: family
-            )
-
-            // If you have a backend, send the token (mock by default)
+    /// Start the Apple Sign In flow
+    func signIn() {
+        Task {
+            isLoading = true
+            errorMessage = nil
+            
             do {
-                let sessionToken = try await network.sendProviderToken(providerToken)
-                if let s = sessionToken {
-                    KeychainHelper.standard.save(token: s, for: "session_token")
+                let providerToken = try await authService.signIn()
+                
+                // Ensure we have the required ID token
+                guard providerToken.idToken != nil else {
+                    throw AuthError.missingIdToken
                 }
-                // persist visible user data
+
+                // Send provider token to backend
+                let refreshToken = try await network.sendProviderToken(providerToken)
+
+                // Check if backend returned a valid refresh token
+                guard let refreshToken = refreshToken, !refreshToken.isEmpty else {
+                    throw AuthError.noRefreshTokenFromBackend
+                }
+
+                // Store user information (Apple provides email/name only on first sign-in)
                 if let uid = providerToken.userID { userID = uid }
-                if let e = providerToken.email { email = e }
-                if let g = providerToken.givenName { firstName = g }
-                if let f = providerToken.familyName { lastName = f }
+                if let e = providerToken.email, !e.isEmpty { email = e }
+                if let g = providerToken.givenName, !g.isEmpty { firstName = g }
+                if let f = providerToken.familyName, !f.isEmpty { lastName = f }
 
                 isAuthenticated = true
+                
             } catch {
                 errorMessage = error.localizedDescription
+                isAuthenticated = false
             }
-            // clear nonce after processing
-            currentRawNonce = nil
+            
+            isLoading = false
         }
+    }
+
+    /// Sign out the user
+    func signOut() {
+        // Clear keychain tokens
+        KeychainHelper.standard.delete(for: "refresh_token")
+        KeychainHelper.standard.delete(for: "access_token")
+        
+        // Clear user data
+        email = ""
+        firstName = ""
+        lastName = ""
+        userID = ""
+        
+        isAuthenticated = false
+        errorMessage = nil
+    }
+
+    /// Refresh the access token using stored refresh token
+    func refreshAccessToken() async throws -> Bool {
+        guard KeychainHelper.standard.read(for: "refresh_token") != nil else {
+            throw AuthError.noRefreshToken
+        }
+
+        // TODO: Implement refresh token endpoint call
+        // This should call your backend's refresh endpoint
+        // For now, we'll just check if the refresh token exists
+        return true
     }
 }

@@ -5,8 +5,6 @@
 //  Created by shortcut mac on 17.8.25.
 //
 
-
-
 import SwiftUI
 import AuthenticationServices
 
@@ -15,72 +13,60 @@ struct AppleAuthView: View {
 
     var body: some View {
         VStack(spacing: 18) {
-            Text("SmartSpend").font(.largeTitle).bold()
+            Text("SmartSpend")
+                .font(.largeTitle)
+                .bold()
 
-            if vm.isLoading { ProgressView() }
-
-            SignInWithAppleButton(.signIn) { request in
-                request.requestedScopes = [.email, .fullName]
-                // set hashed nonce (ViewModel returns hashed value)
-                request.nonce = vm.prepareNonceForRequest()
-            } onCompletion: { result in
-                vm.handleAuthorizationResult(result)
+            if vm.isLoading {
+                ProgressView("Signing in...")
             }
-            .frame(height: 44)
-            .signInWithAppleButtonStyle(.black)
+
+            // Use the custom sign in button that properly integrates with your service
+            Button(action: {
+                vm.signIn()
+            }) {
+                HStack {
+                    Image(systemName: "apple.logo")
+                        .foregroundColor(.white)
+                    Text("Sign in with Apple")
+                        .foregroundColor(.white)
+                        .fontWeight(.medium)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 44)
+                .background(Color.black)
+                .cornerRadius(8)
+            }
+            .disabled(vm.isLoading)
             .padding(.horizontal, 24)
 
             if let err = vm.errorMessage {
-                Text(err).foregroundColor(.red).multilineTextAlignment(.center).padding(.horizontal)
+                Text(err)
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
             }
 
             if vm.isAuthenticated {
-                Text("Signed in").foregroundColor(.green).bold()
+                VStack(spacing: 8) {
+                    Text("Signed in")
+                        .foregroundColor(.green)
+                        .bold()
+                    
+                    if !vm.firstName.isEmpty || !vm.email.isEmpty {
+                        Text("\(vm.firstName) — \(vm.email)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Button("Sign out") {
+                        vm.signOut()
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.top, 8)
+                }
             }
         }
         .padding()
     }
 }
-
-
-
-//import SwiftUI
-//import AuthenticationServices
-//
-//struct AppleAuthView: View {
-//    @StateObject private var vm = AppleAuthViewModel()
-//
-//    var body: some View {
-//        VStack(spacing: 18) {
-//            Text("SmartSpend")
-//                .font(.largeTitle)
-//                .bold()
-//
-//            if vm.isLoading { ProgressView() }
-//
-//            SignInWithAppleButton(.signIn) { request in
-//                request.requestedScopes = [.email, .fullName]
-//                // nonce handled by AppleAuthService.signIn()
-//            } onCompletion: { _ in }
-//            .onTapGesture { vm.signIn() }
-//            .frame(height: 44)
-//            .signInWithAppleButtonStyle(.black)
-//            .padding(.horizontal, 24)
-//
-//            if let err = vm.errorMessage {
-//                Text(err).foregroundColor(.red).multilineTextAlignment(.center).padding(.horizontal)
-//            }
-//
-//            if vm.isAuthenticated {
-//                VStack(spacing: 8) {
-//                    Text("Signed in").foregroundColor(.green).bold()
-//                    if !vm.firstName.isEmpty || !vm.email.isEmpty {
-//                        Text("\(vm.firstName) — \(vm.email)").font(.subheadline).foregroundColor(.secondary)
-//                    }
-//                    Button("Sign out") { vm.signOut() }.buttonStyle(.bordered).padding(.top, 8)
-//                }
-//            }
-//        }
-//        .padding()
-//    }
-//}

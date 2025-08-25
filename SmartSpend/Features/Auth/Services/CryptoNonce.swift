@@ -33,4 +33,3 @@ func sha256Hex(_ input: String) -> String {
     let hashed = SHA256.hash(data: Data(input.utf8))
     return hashed.compactMap { String(format: "%02x", $0) }.joined()
 }
-

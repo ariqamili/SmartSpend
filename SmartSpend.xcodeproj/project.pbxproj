@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE559DE42E536E6F00A59B1A /* RemoteAuthNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE559DE32E536E6F00A59B1A /* RemoteAuthNetworking.swift */; };
 		EEA8CC902E52335900089C13 /* AuthLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC8F2E52335900089C13 /* AuthLoadingView.swift */; };
 		EEA8CC942E52363B00089C13 /* AppleAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC932E52363B00089C13 /* AppleAuthView.swift */; };
 		EEA8CC962E52369500089C13 /* AppleAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC952E52369500089C13 /* AppleAuthViewModel.swift */; };
@@ -14,16 +15,20 @@
 		EEA8CC9A2E52375100089C13 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC992E52375100089C13 /* AuthConstants.swift */; };
 		EEA8CC9C2E52379300089C13 /* CryptoNonce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC9B2E52379300089C13 /* CryptoNonce.swift */; };
 		EEA8CC9E2E5237CD00089C13 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC9D2E5237CD00089C13 /* KeychainHelper.swift */; };
-		EEA8CCA02E5237F600089C13 /* AppleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CC9F2E5237F600089C13 /* AppleAuthService.swift */; };
 		EEA8CCA22E523ADB00089C13 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CCA12E523ADB00089C13 /* AuthCoordinator.swift */; };
 		EEA8CCA42E523B0900089C13 /* AuthNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8CCA32E523B0900089C13 /* AuthNetworking.swift */; };
 		EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */; };
 		EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */; };
 		EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */; };
 		EEB321E52E4CCA7400BD4E77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */; };
+		EEB8936B2E57900C00777473 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB8936A2E57900C00777473 /* HomeView.swift */; };
+		EEF793D52E552B6D0076354E /* AppleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF793D42E552B6D0076354E /* AppleAuthService.swift */; };
+		EEF793D72E568FA10076354E /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF793D62E568FA10076354E /* TokenManager.swift */; };
+		EEF793E12E56A4B40076354E /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF793E02E56A4B40076354E /* AuthError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE559DE32E536E6F00A59B1A /* RemoteAuthNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthNetworking.swift; sourceTree = "<group>"; };
 		EEA8CC8F2E52335900089C13 /* AuthLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLoadingView.swift; sourceTree = "<group>"; };
 		EEA8CC932E52363B00089C13 /* AppleAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthView.swift; sourceTree = "<group>"; };
 		EEA8CC952E52369500089C13 /* AppleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthViewModel.swift; sourceTree = "<group>"; };
@@ -31,7 +36,6 @@
 		EEA8CC992E52375100089C13 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
 		EEA8CC9B2E52379300089C13 /* CryptoNonce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoNonce.swift; sourceTree = "<group>"; };
 		EEA8CC9D2E5237CD00089C13 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
-		EEA8CC9F2E5237F600089C13 /* AppleAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthService.swift; sourceTree = "<group>"; };
 		EEA8CCA12E523ADB00089C13 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		EEA8CCA32E523B0900089C13 /* AuthNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworking.swift; sourceTree = "<group>"; };
 		EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSpend.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,15 +43,18 @@
 		EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EEB893672E577D8700777473 /* SmartSpend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSpend.entitlements; sourceTree = "<group>"; };
+		EEB8936A2E57900C00777473 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EEF793D42E552B6D0076354E /* AppleAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthService.swift; sourceTree = "<group>"; };
+		EEF793D62E568FA10076354E /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		EEF793E02E56A4B40076354E /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		EEB321D72E4CCA7200BD4E77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -55,6 +62,7 @@
 		EEA8CC872E5231AD00089C13 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				EEB893682E578FE000777473 /* Home */,
 				EEA8CC882E5231C600089C13 /* Auth */,
 			);
 			path = Features;
@@ -102,9 +110,12 @@
 			children = (
 				EEA8CC9B2E52379300089C13 /* CryptoNonce.swift */,
 				EEA8CC9D2E5237CD00089C13 /* KeychainHelper.swift */,
-				EEA8CC9F2E5237F600089C13 /* AppleAuthService.swift */,
 				EEA8CCA12E523ADB00089C13 /* AuthCoordinator.swift */,
 				EEA8CCA32E523B0900089C13 /* AuthNetworking.swift */,
+				EE559DE32E536E6F00A59B1A /* RemoteAuthNetworking.swift */,
+				EEF793D42E552B6D0076354E /* AppleAuthService.swift */,
+				EEF793D62E568FA10076354E /* TokenManager.swift */,
+				EEF793E02E56A4B40076354E /* AuthError.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -128,6 +139,7 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				EEB893672E577D8700777473 /* SmartSpend.entitlements */,
 				EEA8CC872E5231AD00089C13 /* Features */,
 				EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */,
 				EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */,
@@ -145,6 +157,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		EEB893682E578FE000777473 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EEB893692E578FEB00777473 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EEB893692E578FEB00777473 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EEB8936A2E57900C00777473 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,8 +185,6 @@
 				EEB321D82E4CCA7200BD4E77 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = SmartSpend;
 			productName = SmartSpend;
@@ -173,7 +199,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					EEB321D92E4CCA7200BD4E77 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -181,7 +207,6 @@
 				};
 			};
 			buildConfigurationList = EEB321D52E4CCA7200BD4E77 /* Build configuration list for PBXProject "SmartSpend" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -189,6 +214,7 @@
 				Base,
 			);
 			mainGroup = EEB321D12E4CCA7200BD4E77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = EEB321DB2E4CCA7200BD4E77 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -201,19 +227,16 @@
 /* Begin PBXResourcesBuildPhase section */
 		EEB321D82E4CCA7200BD4E77 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				EEB321E52E4CCA7400BD4E77 /* Preview Assets.xcassets in Resources */,
 				EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EEB321D62E4CCA7200BD4E77 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				EEA8CC9C2E52379300089C13 /* CryptoNonce.swift in Sources */,
 				EEA8CC982E52372300089C13 /* ProviderToken.swift in Sources */,
@@ -221,19 +244,22 @@
 				EEA8CC962E52369500089C13 /* AppleAuthViewModel.swift in Sources */,
 				EEA8CC9E2E5237CD00089C13 /* KeychainHelper.swift in Sources */,
 				EEA8CCA42E523B0900089C13 /* AuthNetworking.swift in Sources */,
+				EEF793D72E568FA10076354E /* TokenManager.swift in Sources */,
 				EEA8CC942E52363B00089C13 /* AppleAuthView.swift in Sources */,
 				EEA8CCA22E523ADB00089C13 /* AuthCoordinator.swift in Sources */,
+				EEF793E12E56A4B40076354E /* AuthError.swift in Sources */,
 				EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */,
+				EEF793D52E552B6D0076354E /* AppleAuthService.swift in Sources */,
 				EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */,
-				EEA8CCA02E5237F600089C13 /* AppleAuthService.swift in Sources */,
+				EEB8936B2E57900C00777473 /* HomeView.swift in Sources */,
 				EEA8CC9A2E52375100089C13 /* AuthConstants.swift in Sources */,
+				EE559DE42E536E6F00A59B1A /* RemoteAuthNetworking.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		EEB321E62E4CCA7400BD4E77 /* Debug */ = {
+		EEB321E62E4CCA7400BD4E77 /* Debug configuration for PBXProject "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -267,8 +293,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = L87YWN3WM4;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -293,7 +321,7 @@
 			};
 			name = Debug;
 		};
-		EEB321E72E4CCA7400BD4E77 /* Release */ = {
+		EEB321E72E4CCA7400BD4E77 /* Release configuration for PBXProject "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -327,8 +355,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = L87YWN3WM4;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -347,11 +377,12 @@
 			};
 			name = Release;
 		};
-		EEB321E92E4CCA7400BD4E77 /* Debug */ = {
+		EEB321E92E4CCA7400BD4E77 /* Debug configuration for PBXNativeTarget "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SmartSpend/SmartSpend.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SmartSpend/Preview Content\"";
@@ -362,6 +393,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,11 +407,12 @@
 			};
 			name = Debug;
 		};
-		EEB321EA2E4CCA7400BD4E77 /* Release */ = {
+		EEB321EA2E4CCA7400BD4E77 /* Release configuration for PBXNativeTarget "SmartSpend" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SmartSpend/SmartSpend.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SmartSpend/Preview Content\"";
@@ -390,6 +423,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -409,19 +443,17 @@
 		EEB321D52E4CCA7200BD4E77 /* Build configuration list for PBXProject "SmartSpend" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EEB321E62E4CCA7400BD4E77 /* Debug */,
-				EEB321E72E4CCA7400BD4E77 /* Release */,
+				EEB321E62E4CCA7400BD4E77 /* Debug configuration for PBXProject "SmartSpend" */,
+				EEB321E72E4CCA7400BD4E77 /* Release configuration for PBXProject "SmartSpend" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		EEB321E82E4CCA7400BD4E77 /* Build configuration list for PBXNativeTarget "SmartSpend" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EEB321E92E4CCA7400BD4E77 /* Debug */,
-				EEB321EA2E4CCA7400BD4E77 /* Release */,
+				EEB321E92E4CCA7400BD4E77 /* Debug configuration for PBXNativeTarget "SmartSpend" */,
+				EEB321EA2E4CCA7400BD4E77 /* Release configuration for PBXNativeTarget "SmartSpend" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

@@ -2,30 +2,30 @@
 //  AppleAuthService.swift
 //  SmartSpend
 //
-//  Created by shortcut mac on 17.8.25.
+//  Created by shortcut mac on 20.8.25.
 //
 
 import Foundation
 import AuthenticationServices
 import UIKit
 
-/// Performs Sign in with Apple (ASAuthorizationController) and returns ProviderToken
+/// Performs Sign in with Apple and returns ProviderToken with ID token
 final class AppleAuthService: NSObject {
     private var appleContinuation: CheckedContinuation<ProviderToken, Error>?
     private var currentRawNonce: String?
 
-    /// Start Sign in with Apple and return ProviderToken
+    /// Start Sign in with Apple and return ProviderToken with ID token
     func signIn() async throws -> ProviderToken {
-        let raw = randomNonceString()
-        currentRawNonce = raw
-        let hashed = sha256Hex(raw)
+        let rawNonce = randomNonceString()
+        currentRawNonce = rawNonce
+        let hashedNonce = sha256Hex(rawNonce)
 
         return try await withCheckedThrowingContinuation { continuation in
             self.appleContinuation = continuation
 
             let request = ASAuthorizationAppleIDProvider().createRequest()
             request.requestedScopes = [.email, .fullName]
-            request.nonce = hashed
+            request.nonce = hashedNonce
 
             let controller = ASAuthorizationController(authorizationRequests: [request])
             controller.delegate = self
@@ -37,52 +37,45 @@ final class AppleAuthService: NSObject {
 
 extension AppleAuthService: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first { $0.activationState == .foregroundActive } as? UIWindowScene
-        return windowScene?.windows.first { $0.isKeyWindow } ?? ASPresentationAnchor()
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+            return ASPresentationAnchor()
+        }
+        return window
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        defer { appleContinuation = nil; currentRawNonce = nil }
+        defer {
+            appleContinuation = nil
+            currentRawNonce = nil
+        }
 
-        guard let cred = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            appleContinuation?.resume(throwing: NSError(domain: "AppleAuth", code: 1, userInfo: [NSLocalizedDescriptionKey: "No Apple credential"]))
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            appleContinuation?.resume(throwing: AuthError.invalidCredential)
             return
         }
 
-        let userId = cred.user
-        let email = cred.email
-        let given = cred.fullName?.givenName
-        let family = cred.fullName?.familyName
-
-        if let idTokenData = cred.identityToken, let idToken = String(data: idTokenData, encoding: .utf8) {
-            let authCodeString = cred.authorizationCode.flatMap { String(data: $0, encoding: .utf8) }
-            let token = ProviderToken(provider: "apple",
-                                      idToken: idToken,
-                                      authorizationCode: authCodeString,
-                                      rawNonce: currentRawNonce,
-                                      userID: userId,
-                                      email: email,
-                                      givenName: given,
-                                      familyName: family)
-            appleContinuation?.resume(returning: token)
+        // IMPORTANT: We need the ID token for your backend flow
+        guard let identityTokenData = credential.identityToken,
+              let identityToken = String(data: identityTokenData, encoding: .utf8) else {
+            appleContinuation?.resume(throwing: AuthError.missingIdToken)
             return
         }
 
-        if let authCodeString = cred.authorizationCode.flatMap({ String(data: $0, encoding: .utf8) }) {
-            let token = ProviderToken(provider: "apple",
-                                      idToken: nil,
-                                      authorizationCode: authCodeString,
-                                      rawNonce: currentRawNonce,
-                                      userID: userId,
-                                      email: email,
-                                      givenName: given,
-                                      familyName: family)
-            appleContinuation?.resume(returning: token)
-            return
-        }
+        let authCode = credential.authorizationCode.flatMap { String(data: $0, encoding: .utf8) }
+        
+        let providerToken = ProviderToken(
+            provider: "apple",
+            idToken: identityToken,
+            authorizationCode: authCode,
+            rawNonce: currentRawNonce,
+            userID: credential.user,
+            email: credential.email,
+            givenName: credential.fullName?.givenName,
+            familyName: credential.fullName?.familyName
+        )
 
-        appleContinuation?.resume(throwing: NSError(domain: "AppleAuth", code: 2, userInfo: [NSLocalizedDescriptionKey: "Missing token"]))
+        appleContinuation?.resume(returning: providerToken)
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
