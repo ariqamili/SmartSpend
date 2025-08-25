@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddView: View {
+struct AddBottomSheetView: View {
     @State private var selected = 1
     
     
@@ -89,5 +89,5 @@ struct AddView: View {
 
 
 #Preview {
-    AddView()
+    AddBottomSheetView()
 }
