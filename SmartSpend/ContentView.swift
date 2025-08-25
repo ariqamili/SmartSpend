@@ -10,39 +10,51 @@ struct ContentView: View {
     @State private var showAddSheet = false
     
     var body: some View {
-        
-            TabView(selection: $selection) {
-                HomeView()
-                    .tabItem {
-                        Label("Home", systemImage: "house")
-                    }
-                    .tag(TabKey.home)
+        Group {
+            if authVM.isSignedIn {
                 
-                Text("") // Placeholder for Add button
-                    .tabItem {
-                        Label("Add", systemImage: "plus.circle")
-                    }
-                    .tag(TabKey.add)
-                
-                AccountView()
-                    .tabItem {
-                        Label("Account", systemImage: "person.crop.circle")
-                    }
-                    .tag(TabKey.account)
-            }
-            .tint(Color.MainColor)
-            .onChange(of: selection) {
-                if selection == .add  {
-                    showAddSheet = true
-                    selection = .home
+                TabView(selection: $selection) {
+                    HomeView()
+                        .tabItem {
+                            Label("Home", systemImage: "house")
+                        }
+                        .tag(TabKey.home)
+                    
+                    Text("") // Placeholder for Add button
+                        .tabItem {
+                            Label("Add", systemImage: "plus.circle")
+                        }
+                        .tag(TabKey.add)
+                    
+                    AccountView()
+                        .tabItem {
+                            Label("Account", systemImage: "person.crop.circle")
+                        }
+                        .tag(TabKey.account)
                 }
-            }
-            .sheet(isPresented: $showAddSheet) {
-                AddBottomSheetView()
-                    .presentationDetents([.medium, .large])
+                .tint(Color.MainColor)
+                .onChange(of: selection) {
+                    if selection == .add  {
+                        showAddSheet = true
+                        selection = lastNonAddSelection
+                    } else {
+                        lastNonAddSelection = selection
+                    }
+                }
+                .sheet(isPresented: $showAddSheet) {
+                    AddBottomSheetView()
+                        .presentationDetents([.medium, .large])
+                }
+            }else {
+                
+                LoginView()
             }
             
+          }
+        
         }
+    
+    
     }
     
     struct AddBottomSheetView: View {
