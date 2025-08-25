@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var currency: String = "MKD"
-    @State var balance: Double = 20000
-    @State var show: Bool = true
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some View {
         
         SmartSpendNavigationView(){
@@ -23,13 +22,13 @@ struct HomeView: View {
                     .padding(.top)
                 
                 HStack{
-                    if show {
-                        Text("\(balance.formatted(.currency(code: currency)))")
+                    if viewModel.show {
+                        Text("\(viewModel.balance.formatted(.currency(code: viewModel.currency)))")
                             .font(.system(size: 35))
                             .frame(maxWidth: 370, alignment: .leading)
                             .foregroundStyle(.black)
                     } else{
-                        Text("**** \(currency)")
+                        Text("**** \(viewModel.currency)")
                             .font(.system(size: 35))
                             .frame(maxWidth: 370, alignment: .leading)
                             .foregroundStyle(.black)
@@ -37,9 +36,9 @@ struct HomeView: View {
                     
                     
                     Button {
-                        show.toggle()
+                        viewModel.toggleVisibility()
                     } label: {
-                        if show{
+                        if viewModel.show{
                             Image(systemName:"eye.slash")
                                 .foregroundStyle(.black)
                         } else{
@@ -69,3 +68,6 @@ struct HomeView: View {
 #Preview {
     HomeView()
 }
+
+
+

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7A657E4D2E52760A00B099F1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4C2E52760A00B099F1 /* GoogleSignIn */; };
 		7A657E4F2E52760A00B099F1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4E2E52760A00B099F1 /* GoogleSignInSwift */; };
-		7A657E572E52772400B099F1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E562E52772400B099F1 /* HomeView.swift */; };
 		7A657E592E52773700B099F1 /* AddBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E582E52773700B099F1 /* AddBottomSheetView.swift */; };
 		7A657E5B2E52774800B099F1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A657E5A2E52774800B099F1 /* AccountView.swift */; };
 		EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */; };
@@ -20,7 +19,6 @@
 
 /* Begin PBXFileReference section */
 		7A657E4A2E52746100B099F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7A657E562E52772400B099F1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7A657E582E52773700B099F1 /* AddBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBottomSheetView.swift; sourceTree = "<group>"; };
 		7A657E5A2E52774800B099F1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSpend.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +42,11 @@
 		7AC367D02E57595F00424841 /* Auth */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		7AC367FF2E5C9B9600424841 /* Home */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -78,6 +81,7 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				7AC367FF2E5C9B9600424841 /* Home */,
 				7AC367D02E57595F00424841 /* Auth */,
 				7A38C6272E55ECA20030D210 /* Shared */,
 				7A38C61E2E55BE290030D210 /* Network */,
@@ -86,7 +90,6 @@
 				EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */,
 				7A657E5A2E52774800B099F1 /* AccountView.swift */,
 				7A657E582E52773700B099F1 /* AddBottomSheetView.swift */,
-				7A657E562E52772400B099F1 /* HomeView.swift */,
 				EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */,
 				EEB321E32E4CCA7400BD4E77 /* Preview Content */,
 			);
@@ -118,6 +121,7 @@
 				7A38C61E2E55BE290030D210 /* Network */,
 				7A38C6272E55ECA20030D210 /* Shared */,
 				7AC367D02E57595F00424841 /* Auth */,
+				7AC367FF2E5C9B9600424841 /* Home */,
 			);
 			name = SmartSpend;
 			productName = SmartSpend;
@@ -177,7 +181,6 @@
 				EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */,
 				7A657E592E52773700B099F1 /* AddBottomSheetView.swift in Sources */,
 				7A657E5B2E52774800B099F1 /* AccountView.swift in Sources */,
-				7A657E572E52772400B099F1 /* HomeView.swift in Sources */,
 				EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */,
 			);
 		};
