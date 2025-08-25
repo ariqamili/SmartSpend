@@ -17,4 +17,6 @@ class HomeViewModel: ObservableObject {
     func toggleVisibility() {
         show.toggle()
     }
+    
+    
 }
