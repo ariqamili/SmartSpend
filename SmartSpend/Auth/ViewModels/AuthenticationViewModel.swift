@@ -6,7 +6,7 @@
 //
 //
 //
-//
+
 //import Foundation
 //import SwiftUI
 //import GoogleSignIn
@@ -88,7 +88,7 @@
 //    }
 //
 //    private func sendTokenToBackend(_ token: String) {
-//        guard let url = URL(string: "https://0cb0430f792a.ngrok-free.app/api/auth/signin/google") else { return }
+//        guard let url = URL(string: "https://96aed091191d.ngrok-free.app/api/auth/google") else { return }
 //        var request = URLRequest(url: url)
 //        request.httpMethod = "POST"
 //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -96,8 +96,7 @@
 //        URLSession.shared.dataTask(with: request).resume()
 //    }
 //}
-
-
+//
 
 
 
@@ -110,38 +109,92 @@ import GoogleSignIn
 class AuthenticationViewModel: ObservableObject {
     @Published var isSignedIn = false
     @Published var fullName: String?
+    @Published var email: String?
+    @Published var profileImageURL: String?
+    @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var categoryVM: CategoryViewModel
     
+
     func signIn() {
-         guard let rootVC = UIApplication.shared.connectedScenes
-             .compactMap({ $0 as? UIWindowScene })
-             .first?.windows.first?.rootViewController else { return }
+        print("DEBUG: signIn() called")
 
-         GIDSignIn.sharedInstance.signIn(withPresenting: rootVC) { [weak self] result, error in
-             if let error = error {
-                 print("Sign in error:", error)
-                 return
-             }
-             if let user = result?.user {
-                 self?.setSignedIn(user: user)
-             }
-         }
-     }
+        guard let rootVC = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first?.windows.first?.rootViewController else { return }
 
-    func setSignedIn(user: GIDGoogleUser) {
-        let idToken = user.idToken?.tokenString ?? ""
+        GIDSignIn.sharedInstance.signIn(withPresenting: rootVC) { [weak self] result, error in
+            if let error = error {
+                print("Sign in error:", error)
+                return
+            }
+            if let user = result?.user {
+                self?.setSignedIn(user: user)
+            }
+        }
+    }
+
+//    func setSignedIn(user: GIDGoogleUser) {
+//        let idToken = user.idToken?.tokenString ?? ""
+//        print("Got ID Token:", idToken)
+//
+//        Task {
+//            struct SignInResponse: Decodable {
+//                let message: String
+//                let refresh_token: String
+//                let access_token: String
+//            }
+//
+//            do {
+//                let response: SignInResponse = try await APIClient.shared.request(
+//                    endpoint: "api/auth/google",
+//                    method: "POST",
+//                    body: ["id_token": idToken]
+//                )
+//
+//                await TokenManager.shared.saveTokens(
+//                    access: response.access_token,
+//                    refresh: response.refresh_token
+//                )
+//                
+//                
+////                await userVM.fetchUser()
+////                await categoryVM.fetchCategories()
+//                
+//
+//                DispatchQueue.main.async {
+//                    self.fullName = user.profile?.name
+//                    self.isSignedIn = true
+//                }
+//            } catch {
+//                print("Sign in failed:", error)
+//            }
+//        }
+//    }
+    
+    private func setSignedIn(user: GIDGoogleUser) {
+        fullName = user.profile?.name
+        email = user.profile?.email
+
+        // ✅ Get ID Token and Access Token
+        let idToken = user.idToken?.tokenString
+        let accessToken = user.accessToken.tokenString
+
+        print("Got ID Token:", idToken ?? "nil")
+        print("Got Access Token:", accessToken)
 
         Task {
-            struct SignInResponse: Decodable {
-                let message: String
-                let refresh_token: String
-                let access_token: String
-            }
-
             do {
+                struct SignInResponse: Decodable {
+                    let message: String
+                    let access_token: String
+                    let refresh_token: String
+                }
+
+                // 👇 send the idToken (backend must verify against iOS client ID)
                 let response: SignInResponse = try await APIClient.shared.request(
-                    endpoint: "/api/auth/signin/google",
+                    endpoint: "api/auth/google",
                     method: "POST",
-                    body: ["id_token": idToken]
+                    body: ["id_token": idToken ?? ""]
                 )
 
                 await TokenManager.shared.saveTokens(
@@ -149,8 +202,10 @@ class AuthenticationViewModel: ObservableObject {
                     refresh: response.refresh_token
                 )
 
+//                await userVM.fetchUser()
+//                await categoryVM.fetchCategories()
+                
                 DispatchQueue.main.async {
-                    self.fullName = user.profile?.name
                     self.isSignedIn = true
                 }
             } catch {
@@ -158,6 +213,8 @@ class AuthenticationViewModel: ObservableObject {
             }
         }
     }
+
+
 
     func signOut() {
         Task {
@@ -167,11 +224,7 @@ class AuthenticationViewModel: ObservableObject {
             ) as [String: String]
 
             await TokenManager.shared.saveTokens(access: "", refresh: "")
-         //   DispatchQueue.main.async {
-            
             self.isSignedIn = false
-            
-        // }
         }
     }
 }

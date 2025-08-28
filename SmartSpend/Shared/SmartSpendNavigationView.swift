@@ -19,13 +19,15 @@ struct SmartSpendNavigationView<Content: View>: View {
                   content
                       .toolbar {
                           ToolbarItem(placement: .topBarLeading) {
-                              HStack {
                                   Image("SmartSpendLogo")
                                       .resizable()
                                       .frame(width: 50, height: 40)
-                                  Text("SmartSpend")
-                                      .font(.headline)
-                              }
+
+                          }
+                          
+                          ToolbarItem(placement: .principal){
+                              Text("SmartSpend")
+                                  .font(.headline)
                           }
                           
                           ToolbarItem(placement: .topBarTrailing) {
