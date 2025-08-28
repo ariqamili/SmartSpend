@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-    
+    @StateObject private var viewModelUser = UserViewModel()
+
     var body: some View {
         
         SmartSpendNavigationView(){
@@ -17,21 +18,19 @@ struct HomeView: View {
                 Text("Your Balance")
                     .font(.caption)
                     .frame(maxWidth: 370, alignment: .leading)
-                    .foregroundStyle(.gray)
-                    .padding(.top)
-                    .padding(.top)
-                
+                    .foregroundStyle(.gray)                
                 HStack{
                     if viewModel.show {
+//                        Text("\(viewModelUser.currentUser?.balance.formatted(.currency(code: viewModelUser.currentUser?.preferredCurrency ?? "USD")) ?? "****")")
                         Text("\(viewModel.balance.formatted(.currency(code: viewModel.currency)))")
                             .font(.system(size: 35))
                             .frame(maxWidth: 370, alignment: .leading)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Color.MainColor)
                     } else{
                         Text("**** \(viewModel.currency)")
                             .font(.system(size: 35))
                             .frame(maxWidth: 370, alignment: .leading)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(Color.MainColor)
                     }
                     
                     
@@ -40,10 +39,10 @@ struct HomeView: View {
                     } label: {
                         if viewModel.show{
                             Image(systemName:"eye.slash")
-                                .foregroundStyle(.black)
+                                .foregroundStyle(.gray)
                         } else{
                             Image(systemName:"eye")
-                                .foregroundStyle(.black)
+                                .foregroundStyle(.gray)
                         }
                     
                         
@@ -51,7 +50,9 @@ struct HomeView: View {
 
                 }
                 .padding(.horizontal)
-
+        
+        
+               TransactionPartialView()
     
                 
                 

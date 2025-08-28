@@ -11,7 +11,7 @@ class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    private let baseURL = URL(string: "https://0cb0430f792a.ngrok-free.app")!
+    private let baseURL = URL(string: "https://96aed091191d.ngrok-free.app/")!
 
     func request<T: Decodable>(
         endpoint: String,
@@ -68,3 +68,4 @@ class APIClient {
         return try JSONDecoder().decode(T.self, from: data)
     }
 }
+

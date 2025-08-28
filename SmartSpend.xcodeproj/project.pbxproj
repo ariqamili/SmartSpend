@@ -35,6 +35,11 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		7AB499172E604F5500DBD5A6 /* User */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = User;
+			sourceTree = "<group>";
+		};
 		7AC367D02E57595F00424841 /* Auth */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Auth;
@@ -53,6 +58,16 @@
 		7AC3680A2E5C9D5700424841 /* Add */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Add;
+			sourceTree = "<group>";
+		};
+		7AEF4B152E5DAD220050CB92 /* Transactions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		7AF92FF12E5FB09600004279 /* Categories */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -87,6 +102,9 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				7AB499172E604F5500DBD5A6 /* User */,
+				7AF92FF12E5FB09600004279 /* Categories */,
+				7AEF4B152E5DAD220050CB92 /* Transactions */,
 				7AC3680A2E5C9D5700424841 /* Add */,
 				7AC368062E5C9D1300424841 /* Account */,
 				7AC367FF2E5C9B9600424841 /* Home */,
@@ -126,10 +144,13 @@
 			fileSystemSynchronizedGroups = (
 				7A38C61E2E55BE290030D210 /* Network */,
 				7A38C6272E55ECA20030D210 /* Shared */,
+				7AB499172E604F5500DBD5A6 /* User */,
 				7AC367D02E57595F00424841 /* Auth */,
 				7AC367FF2E5C9B9600424841 /* Home */,
 				7AC368062E5C9D1300424841 /* Account */,
 				7AC3680A2E5C9D5700424841 /* Add */,
+				7AEF4B152E5DAD220050CB92 /* Transactions */,
+				7AF92FF12E5FB09600004279 /* Categories */,
 			);
 			name = SmartSpend;
 			productName = SmartSpend;
