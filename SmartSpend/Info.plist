@@ -3,17 +3,15 @@
 <plist version="1.0">
 <dict>
     <key>GIDClientID</key>
-    <string>872065087561-mcelvpjmfnva5frae13ii7nlioipo6ql.apps.googleusercontent.com</string>
+    <string>861988830364-inbg002hh7li1cpcei4tvaoimq1n4hq5.apps.googleusercontent.com</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.872065087561-mcelvpjmfnva5frae13ii7nlioipo6ql</string>
+				<string>com.googleusercontent.apps.861988830364-inbg002hh7li1cpcei4tvaoimq1n4hq5</string>
 			</array>
 		</dict>
 	</array>
 </dict>
 </plist>
-
-
