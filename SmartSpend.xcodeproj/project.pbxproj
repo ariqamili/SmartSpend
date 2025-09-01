@@ -70,6 +70,16 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		EEC9C69B2E65DEC400F86412 /* Savings */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Savings;
+			sourceTree = "<group>";
+		};
+		EEC9C6A02E65DF7500F86412 /* Onboard */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Onboard;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,8 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				EEC9C6A02E65DF7500F86412 /* Onboard */,
+				EEC9C69B2E65DEC400F86412 /* Savings */,
 				7AB499172E604F5500DBD5A6 /* User */,
 				7AF92FF12E5FB09600004279 /* Categories */,
 				7AEF4B152E5DAD220050CB92 /* Transactions */,
@@ -151,6 +163,8 @@
 				7AC3680A2E5C9D5700424841 /* Add */,
 				7AEF4B152E5DAD220050CB92 /* Transactions */,
 				7AF92FF12E5FB09600004279 /* Categories */,
+				EEC9C69B2E65DEC400F86412 /* Savings */,
+				EEC9C6A02E65DF7500F86412 /* Onboard */,
 			);
 			name = SmartSpend;
 			productName = SmartSpend;
