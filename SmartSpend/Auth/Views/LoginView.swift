@@ -10,6 +10,7 @@ import GoogleSignInSwift
 
 struct LoginView: View {
     @EnvironmentObject var authVM: AuthenticationViewModel
+    @EnvironmentObject var userVM: UserViewModel
 
 
     var body: some View {
@@ -31,7 +32,7 @@ struct LoginView: View {
 //                .padding()
   
             Button(action: {
-                authVM.signIn()
+                authVM.signIn(userVM: userVM)
             }) {
                 HStack {
                     Image("googleLogo")
@@ -59,5 +60,6 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
-        .environmentObject(AuthenticationViewModel()) 
+        .environmentObject(AuthenticationViewModel())
+        .environmentObject(UserViewModel()) 
 }

@@ -34,65 +34,58 @@ class TransactionViewModel: ObservableObject{
     }
     
     func loadFakeData(){
-        let category: Category = Category(id: UUID(), name: "Job")
          transactions = [
            Transaction(
-               id: UUID(),
+               id: 1,
                title: "Salary",
                price: 2500,
-               dateMade: Date().addingTimeInterval(-86400 * 1), // 1 day ago
-               ownerId: UUID(),
-               category: category,
+               date_made: Date().addingTimeInterval(-86400 * 1), // 1 day ago
+               category_id: 1,
                type: .income
                
            ),
            Transaction(
-               id: UUID(),
+               id: 2,
                title: "Bonus",
                price: 500,
-               dateMade: Date().addingTimeInterval(-86400 * 1), // 1 day ago
-               ownerId: UUID(),
-               category: category,
+               date_made: Date().addingTimeInterval(-86400 * 1), // 1 day ago
+               category_id: 2,
                type: .income
                
            ),
            Transaction(
-               id: UUID(),
+               id: 3,
                title: "Groceries",
                price: 85.50,
-               dateMade: Date().addingTimeInterval(-86400 * 2), // 2 days ago
-               ownerId: UUID(),
-               category: category,
+               date_made: Date().addingTimeInterval(-86400 * 2), // 2 days ago
+               category_id: 3,
                type: .expense
                
            ),
            Transaction(
-               id: UUID(),
+               id: 4,
                title: "Coffee",
                price: 3.20,
-               dateMade: Date().addingTimeInterval(-3600 * 5), // 5 hours ago
-               ownerId: UUID(),
-               category: category,
+               date_made: Date().addingTimeInterval(-3600 * 5), // 5 hours ago
+               category_id: 4,
                type: .expense
                
            ),
            Transaction(
-               id: UUID(),
+               id: 5,
                title: "Freelance Project",
                price: 600,
-               dateMade: Date().addingTimeInterval(-86400 * 3), // 3 days ago
-               ownerId: UUID(),
-               category: category,
+               date_made: Date().addingTimeInterval(-86400 * 3), // 3 days ago
+               category_id: 5,
                type: .income
                
            ),
            Transaction(
-               id: UUID(),
+               id: 6,
                title: "Netflix",
                price: 9.99,
-               dateMade: Date().addingTimeInterval(-86400 * 4),
-               ownerId: UUID(),
-               category: category,
+               date_made: Date().addingTimeInterval(-86400 * 4),
+               category_id: 6,
                type: .expense
                
            )
@@ -137,14 +130,13 @@ class TransactionViewModel: ObservableObject{
     
     
     
-    func addTransaction(title: String, price: Double, dateMade: Date, type: Transaction.TransactionType, ownerId: UUID, category: Category? = nil) async {
+    func addTransaction(title: String, price: Double, date_made: Date, type: Transaction.TransactionType, category_id: Int64? = nil) async {
         let newTransaction = Transaction(
-            id: UUID(),                
+            id: nil,
             title: title,
             price: price,
-            dateMade: dateMade,
-            ownerId: ownerId,          // required by backend
-            category: category,
+            date_made: date_made,
+            category_id: category_id,
             type: type
         )
         
