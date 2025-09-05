@@ -9,8 +9,11 @@ import SwiftUI
 
 struct AddExpenseView: View {
     
-    @StateObject private var viewModel = AddBottomSheetViewModel()
-    @StateObject private var categoryVM = CategoryViewModel()
+    @EnvironmentObject var transactionVM: TransactionViewModel
+    @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var categoryVM: CategoryViewModel
+    @ObservedObject var viewModel: AddBottomSheetViewModel
+
     
     var body: some View {
         NavigationStack {
@@ -20,7 +23,8 @@ struct AddExpenseView: View {
 
                 Picker("Category", selection: $viewModel.expenseCategory){
                     ForEach(categoryVM.categories2){ category in
-                        Text("\(category.name)")
+                        Text(category.name)
+                            .tag(category.id)
                     }
                 }.foregroundStyle(Color.MainColor)
                 
@@ -85,9 +89,20 @@ struct AddExpenseView: View {
 }
 
 #Preview {
-    AddExpenseView()
-}
+    let transactionVM = TransactionViewModel()
+    let userVM = UserViewModel()
+    let categoryVM = CategoryViewModel()
+    let addVM = AddBottomSheetViewModel(
+        transactionVM: transactionVM,
+        userVM: userVM,
+        categoryVM: categoryVM
+    )
 
+    return AddExpenseView(viewModel: addVM)
+        .environmentObject(transactionVM)
+        .environmentObject(userVM)
+        .environmentObject(categoryVM)
+}
 
 #if canImport(UIKit)
 extension View {

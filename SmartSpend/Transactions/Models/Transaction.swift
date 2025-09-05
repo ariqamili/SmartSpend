@@ -23,12 +23,11 @@ import Foundation
 //}
 
 struct Transaction: Identifiable, Codable {
-    let id: UUID
+    let id: Int64?
     let title: String
     let price: Double
-    let dateMade: Date
-    let ownerId: UUID
-    let category: Category?
+    let date_made: Date
+    let category_id: Int64?
     let type: TransactionType
 
     enum TransactionType: String, Codable {
@@ -36,15 +35,7 @@ struct Transaction: Identifiable, Codable {
         case income = "Income"
     }
 
-//    enum CodingKeys: String, CodingKey {
-//        case id = "Id"
-//        case title = "Title"
-//        case price = "Price"
-//        case dateMade = "DateMade"
-//        case ownerId = "Owner"
-//        case category = "Category"
-//        case type = "Type"
-//    }
+
 }
 
 
@@ -52,7 +43,7 @@ struct Transaction: Identifiable, Codable {
 extension Array where Element == Transaction {
     func groupedByDay() -> [Date: [Transaction]] {
         Dictionary(grouping: self) { transaction in
-            Calendar.current.startOfDay(for: transaction.dateMade)
+            Calendar.current.startOfDay(for: transaction.date_made)
         }
     }
 }

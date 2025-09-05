@@ -7,6 +7,17 @@
 
 import Foundation
 
+//enum Enpoints1 {
+//    case user
+//
+//    var getPath: String {
+//        switch self {
+//        case .user:
+//            "user/me"
+//        }
+//    }
+//}
+
 
 @MainActor
 class UserViewModel: ObservableObject {
@@ -14,13 +25,32 @@ class UserViewModel: ObservableObject {
 
     func fetchUser() async {
         do {
-            self.currentUser = try await APIClient.shared.request(endpoint: "/user")
+            let response: UserResponse = try await APIClient.shared.request(endpoint: "api/user/me")
+            self.currentUser = response.data
         } catch {
             print("Failed to fetch user:", error)
         }
     }
 
-    func updateProfile(name: String) async {
-        // Call API /user/update
+    
+    func updateProfile(_ request: UpdateUserRequest) async {
+        
+        struct UpdateUserResponse: Decodable {
+            let message: String
+        }
+        
+        do {
+            let response: UpdateUserResponse = try await APIClient.shared.request(
+                endpoint: "api/user/update",
+                method: "POST",
+                body: request
+            )
+            print(response.message)
+
+//            await fetchUser()
+
+        } catch {
+            print("Failed to update user:", error)
+        }
     }
 }

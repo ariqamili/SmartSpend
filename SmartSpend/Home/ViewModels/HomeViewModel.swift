@@ -10,8 +10,6 @@ import Foundation
 
 @MainActor
 class HomeViewModel: ObservableObject {
-    @Published var currency: String = "MKD"
-    @Published var balance: Double = 20000
     @Published var show: Bool = true
     
     func toggleVisibility() {

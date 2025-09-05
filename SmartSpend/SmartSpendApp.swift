@@ -11,9 +11,10 @@ import GoogleSignIn
 
 @main
 struct SmartSpendApp: App {
-    @StateObject var authVM = AuthenticationViewModel()
     @StateObject var userVM = UserViewModel()
+    @StateObject var authVM = AuthenticationViewModel()
     @StateObject var categoryVM = CategoryViewModel()
+    @StateObject var transactionVM = TransactionViewModel()
     
 
     var body: some Scene {
@@ -22,8 +23,12 @@ struct SmartSpendApp: App {
                 .environmentObject(userVM)
                 .environmentObject(categoryVM)
                 .environmentObject(authVM)
+                .environmentObject(transactionVM)
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
+                }
+                .task {
+                    await authVM.restoreSession(userVM: userVM)
                 }
         }
     }

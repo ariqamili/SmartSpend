@@ -8,11 +8,7 @@
 import Foundation
 
 struct Category: Identifiable, Codable, Hashable {
-    let id: UUID
+    let id: Int64
     let name: String
 
-//    enum CodingKeys: String, CodingKey {
-//        case id = "Id"
-//        case name = "Name"
-//    }
 }

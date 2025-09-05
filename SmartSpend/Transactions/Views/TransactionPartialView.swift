@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TransactionPartialView: View {
-    @StateObject private var viewModel: TransactionViewModel = TransactionViewModel()
-    
+    @EnvironmentObject var transactionVM: TransactionViewModel
+
     var body: some View {
         
         NavigationStack{
@@ -24,7 +24,7 @@ struct TransactionPartialView: View {
 
 
             
-            List(viewModel.transactions.suffix(3)){ transaction in
+            List(transactionVM.transactions.suffix(3)){ transaction in
                 HStack(alignment: .center, spacing: nil){
                     if (transaction.type == .income){
                         Image(systemName: "arrow.down.backward").foregroundStyle(.green)
@@ -70,4 +70,5 @@ struct TransactionPartialView: View {
 
 #Preview {
     TransactionPartialView()
+        .environmentObject(TransactionViewModel())
 }

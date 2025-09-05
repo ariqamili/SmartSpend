@@ -59,13 +59,16 @@
 //}
 //
 
+
+
 import SwiftUI
 
 struct TransactionsFullView: View {
-    @StateObject private var viewModel = TransactionViewModel()
+    @EnvironmentObject var transactionVM: TransactionViewModel
+
     
     var body: some View {
-        let grouped = viewModel.transactions.groupedByDay()
+        let grouped = transactionVM.transactions.groupedByDay()
         let sortedDays = grouped.keys.sorted(by: >) // newest first
         
         NavigationStack {
@@ -115,6 +118,7 @@ struct TransactionsFullView: View {
 
 #Preview {
     TransactionsFullView()
+        .environmentObject(TransactionViewModel())
 }
 
 
