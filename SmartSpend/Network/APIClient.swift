@@ -176,7 +176,7 @@ class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    private let baseURL = URL(string: "https://7a989c7506f1.ngrok-free.app/")!
+    private let baseURL = URL(string: "https://c7624a78d6d2.ngrok-free.app/")!
 
     // Generic request that retries once on 401
     func request<T: Decodable>(

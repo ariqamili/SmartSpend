@@ -74,10 +74,11 @@ struct EditAccountView: View {
                         first_name: firstName.isEmpty ? nil : firstName,
                         last_name: lastName.isEmpty ? nil : lastName,
                         username: username.isEmpty ? nil : username,
-                        avatar_url: avatarURL.isEmpty ? nil : avatarURL,
+                        avatar_url: avatarURL.isEmpty ? nil : avatarURL
                     )
                     await userVM.updateProfile(request)
                     dismiss()
+                    await userVM.fetchUser()
                 }
             }
             .frame(maxWidth: .infinity)

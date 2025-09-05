@@ -42,7 +42,7 @@ class UserViewModel: ObservableObject {
         do {
             let response: UpdateUserResponse = try await APIClient.shared.request(
                 endpoint: "api/user/update",
-                method: "POST",
+                method: "PATCH",
                 body: request
             )
             print(response.message)
