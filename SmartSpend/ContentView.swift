@@ -49,7 +49,6 @@ struct ContentView: View {
                         .presentationDetents([.medium, .large])
                 }
             } else {
-                
                 LoginView()
             }
             

@@ -13,24 +13,12 @@ import SwiftUI
 struct SavingGoalRectangle: View {
     @State var goal: CGFloat = 1000
     @State var spent: CGFloat = 200
+    var text: String = "View More"
+    @State var isOnHomeScreen: Bool = true
+    
     var body: some View {
         VStack{
-            
-//                            .padding()
-//            HStack{
-//                Text("MKD 1000")
-//                    .font(.title)
-//                    .padding(.leading)
-////                    .padding(.leading)
-//                Spacer()
-//            }
-//                .padding(.top)
-//            ProgressView(value: spent, total: goal)
-//                .scaleEffect(x: 1, y: 5)
-////                .padding()
-//                .frame(width: 300)
-//                .padding(.bottom)
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading, spacing: 7) {
                 HStack{
                     Text("Saved in August")
                         .padding(.top)
@@ -38,16 +26,24 @@ struct SavingGoalRectangle: View {
                         .opacity(0.6)
                         
                     Spacer()
-                    NavigationLink("View More") {
-                            SavingView()
+                    
+                    if(isOnHomeScreen) {
+                        NavigationLink(text) {
+                                SavingView()
+                            }
+                        .foregroundColor(.MainColor)
+                        .font(.footnote)
+                        .padding(.top)
+                        .padding(.trailing)
+                    } else {
+                        Button(text){
+                            //
                         }
-                    .foregroundColor(.MainColor)
-                        
-                    
-                    
-                    .font(.footnote)
-                    .padding(.top)
-                    .padding(.trailing)
+                        .foregroundColor(.MainColor)
+                        .font(.footnote)
+                        .padding(.top)
+                        .padding(.trailing)
+                    }
                     
                 }
                 Text("MKD 1000")
@@ -56,8 +52,9 @@ struct SavingGoalRectangle: View {
                 ProgressView(value: spent, total: goal)
                     .accentColor(.MainColor)
                     .scaleEffect(x: 1, y: 5)
-                    .frame(width: 340)
+                    .frame(width: .infinity)
                     .padding(.bottom)
+                    .padding(.trailing)
                     
             }
             .padding(.leading)
@@ -76,10 +73,12 @@ struct SavingGoalRectangle: View {
             .padding(.bottom)
         }
         .background(Color.MainColor.opacity(0.2))
-        .frame(width: 370, height: 170)
+//        .frame(width: 400, height: 170)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        
+        .padding(.horizontal)
     }
+    
+    
 }
 
 #Preview {

@@ -13,7 +13,7 @@ struct OnboardingData {
     var currentBalance: String
     
     mutating func updatePreferredCurrency(_ newValue: String) {
-        preferredCurrency = newValue
+         preferredCurrency = newValue
     }
     
     mutating func updateSavingGoal(_ newValue: String) {
@@ -113,11 +113,11 @@ struct OnboardView: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
         .indexViewStyle(.page(backgroundDisplayMode: .always))
-        .background(Color.init(red: 237/255, green: 236/255, blue: 227/255))
+        .background(Color.sideColor)
     }
 }
 
 
 #Preview {
-
+    OnboardView()
 }

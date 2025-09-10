@@ -56,8 +56,9 @@ struct TransactionPartialView: View {
                 .padding(7.5)
             }
             .contentMargins(.vertical, 0)
-            .scrollContentBackground(.hidden)
+//            .scrollContentBackground(.hidden)
             .listRowSpacing(10)
+            .frame(height: .infinity)
             
         }
 //        .task {

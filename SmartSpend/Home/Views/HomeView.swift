@@ -50,13 +50,15 @@ struct HomeView: View {
 
                 }
                 .padding(.horizontal)
+                
         
         
-               TransactionPartialView()
+                TransactionPartialView()
     
+                SavingGoalRectangle(isOnHomeScreen: true)
                 
                 
-                Spacer()
+                StatsView()
                 
             }
         }
