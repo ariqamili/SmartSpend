@@ -1,9 +1,106 @@
-////
-////  APIClient.swift
-////  SmartSpend
-////
-////  Created by Refik Jaija on 20.8.25.
-////
+//
+//  APIClient.swift
+//  SmartSpend
+//
+//  Created by Refik Jaija on 20.8.25.
+
+//
+//import Foundation
+//
+//class APIClient {
+//    static let shared = APIClient()
+//    private init() {}
+//
+//    private let baseURL = URL(string: "https://7c91f8c7b921.ngrok-free.app/")!
+//
+//    func request<T: Decodable>(
+//        endpoint: String,
+//        method: String = "GET",
+//        headers: [String: String]? = nil,
+//        body: Encodable? = nil
+//    ) async throws -> T {
+//
+//        guard let url = URL(string: endpoint, relativeTo: baseURL) else {
+//            throw URLError(.badURL)
+//        }
+//
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = method
+//        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//        // Inject Bearer token
+//        if let token = await TokenManager.shared.accessToken  {
+//            if headers?["Authorization"] == nil {
+//                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+//            }
+//        }
+//        
+//        // Apply any explicit headers from caller (they override defaults above)
+//        if let headers = headers {
+//            for (k, v) in headers {
+//                urlRequest.setValue(v, forHTTPHeaderField: k)
+//            }
+//        }
+//
+//        // Encode body if present
+//        if let body = body {
+//            urlRequest.httpBody = try JSONEncoder().encode(body)
+//        }
+//
+//        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+//
+//        guard let httpResponse = response as? HTTPURLResponse else {
+//            throw URLError(.badServerResponse)
+//        }
+//        
+////        if httpResponse.statusCode == 401 {
+////            if allowRefreshOn401 {
+////                // Attempt to refresh once, then retry the request but do NOT allow further refresh attempts
+////                try await TokenManager.shared.refreshAccessToken()
+////                return try await request(endpoint: endpoint, method: method, headers: headers, body: body, allowRefreshOn401: false)
+////            } else {
+////                // Do not attempt to refresh again (prevents recursion). Surface an auth error.
+////                throw URLError(.userAuthenticationRequired)
+////            }
+////        }
+////        1. do api call
+////        1. use access token
+////        if ok
+////            continue
+////        else
+////            use refresh token to get new access
+////                if ok
+////                    save new access -> continei
+////                else
+////                    force logout screen
+//                    
+//
+//        guard (200...299).contains(httpResponse.statusCode) else {
+//            throw NSError(domain: "", code: httpResponse.statusCode, userInfo: nil)
+//        }
+//
+////        return try JSONDecoder().decode(T.self, from: data)
+//        
+//        do {
+//            return try JSONDecoder().decode(T.self, from: data)
+//        } catch {
+//            let bodyStr = String(data: data, encoding: .utf8) ?? "<non-utf8 response>"
+//            print(" Decoding error: \(error)\nRaw response body:\n\(bodyStr)")
+//            throw error
+//        }
+//    }
+//}
+
+
+
+
+//--------------------------------------------------------------------------------------------------//
+
+//  APIClient.swift
+//  SmartSpend
+//
+//  Created by Refik Jaija on 20.8.25.
+
 //
 //import Foundation
 //
@@ -69,14 +166,9 @@
 //    }
 //}
 //
+//
 
 
-//
-//  APIClient.swift
-//  SmartSpend
-//
-//  Created by Refik Jaija on 20.8.25.
-//
 
 import Foundation
 
@@ -84,12 +176,28 @@ class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    private let baseURL = URL(string: "https://7906c6ac2a58.ngrok-free.app/")!
+    private let baseURL = URL(string: "https://7a989c7506f1.ngrok-free.app/")!
 
+    // Generic request that retries once on 401
     func request<T: Decodable>(
         endpoint: String,
         method: String = "GET",
         body: Encodable? = nil
+    ) async throws -> T {
+
+        do {
+            return try await performRequest(endpoint: endpoint, method: method, body: body, allowRetry: true)
+        } catch {
+            throw error
+        }
+    }
+
+    // Lower-level request
+    private func performRequest<T: Decodable>(
+        endpoint: String,
+        method: String,
+        body: Encodable?,
+        allowRetry: Bool
     ) async throws -> T {
 
         guard let url = URL(string: endpoint, relativeTo: baseURL) else {
@@ -100,14 +208,11 @@ class APIClient {
         urlRequest.httpMethod = method
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        // UPDATED: Inject Bearer token for protected endpoints (exclude auth endpoints)
-        if !endpoint.contains("/api/auth") {
-            if let token = await TokenManager.shared.accessToken {
-                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            }
+        // Add current access token
+        if let token = await TokenManager.shared.accessToken {
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
 
-        // Encode body if present
         if let body = body {
             urlRequest.httpBody = try JSONEncoder().encode(body)
         }
@@ -118,32 +223,11 @@ class APIClient {
             throw URLError(.badServerResponse)
         }
 
-        // UPDATED: Handle 401 (expired access token → refresh flow) but not for auth endpoints
-        if httpResponse.statusCode == 401 && !endpoint.contains("/api/auth") {
-            do {
-                try await TokenManager.shared.refreshAccessToken()
-                
-                // Retry original request with new token
-                if let newToken = await TokenManager.shared.accessToken {
-                    urlRequest.setValue("Bearer \(newToken)", forHTTPHeaderField: "Authorization")
-                    let (retryData, retryResponse) = try await URLSession.shared.data(for: urlRequest)
-                    
-                    guard let retryHttpResponse = retryResponse as? HTTPURLResponse else {
-                        throw URLError(.badServerResponse)
-                    }
-                    
-                    guard (200...299).contains(retryHttpResponse.statusCode) else {
-                        throw NSError(domain: "", code: retryHttpResponse.statusCode, userInfo: nil)
-                    }
-                    
-                    return try JSONDecoder().decode(T.self, from: retryData)
-                }
-            } catch RefreshTokenError.refreshTokenExpired {
-                // NEW: Refresh token expired - need to sign in again
-                // Post notification for logout
-                NotificationCenter.default.post(name: .refreshTokenExpired, object: nil)
-                throw RefreshTokenError.refreshTokenExpired
-            }
+        if httpResponse.statusCode == 401, allowRetry {
+            // refresh token
+            try await TokenManager.shared.refreshAccessToken()
+            // retry once with new token
+            return try await performRequest(endpoint: endpoint, method: method, body: body, allowRetry: false)
         }
 
         guard (200...299).contains(httpResponse.statusCode) else {
@@ -152,9 +236,37 @@ class APIClient {
 
         return try JSONDecoder().decode(T.self, from: data)
     }
-}
 
-// NEW: Notification for handling refresh token expiration
-extension Notification.Name {
-    static let refreshTokenExpired = Notification.Name("refreshTokenExpired")
+    // Raw request for refresh calls (no auto-refresh)
+    func rawRequest<T: Decodable>(
+        endpoint: String,
+        method: String,
+        headers: [String: String],
+        body: Encodable? = nil
+    ) async throws -> T {
+        guard let url = URL(string: endpoint, relativeTo: baseURL) else {
+            throw URLError(.badURL)
+        }
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        for (k, v) in headers {
+            urlRequest.setValue(v, forHTTPHeaderField: k)
+        }
+
+        if let body = body {
+            urlRequest.httpBody = try JSONEncoder().encode(body)
+        }
+
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        return try JSONDecoder().decode(T.self, from: data)
+    }
 }

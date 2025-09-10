@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-    @StateObject private var viewModelUser = UserViewModel()
+    @EnvironmentObject var userVM: UserViewModel
+    
 
     var body: some View {
         
@@ -20,18 +21,26 @@ struct HomeView: View {
                     .frame(maxWidth: 370, alignment: .leading)
                     .foregroundStyle(.gray)                
                 HStack{
+                    
                     if viewModel.show {
-//                        Text("\(viewModelUser.currentUser?.balance.formatted(.currency(code: viewModelUser.currentUser?.preferredCurrency ?? "USD")) ?? "****")")
-                        Text("\(viewModel.balance.formatted(.currency(code: viewModel.currency)))")
-                            .font(.system(size: 35))
-                            .frame(maxWidth: 370, alignment: .leading)
-                            .foregroundStyle(Color.MainColor)
-                    } else{
-                        Text("**** \(viewModel.currency)")
+                        Text(
+                            userVM.currentUser?.balance.formatted(
+                                .currency(code: userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
+                            ) ?? "****"
+                        )
+                        .font(.system(size: 35))
+                        .frame(maxWidth: 370, alignment: .leading)
+                        .foregroundStyle(Color.MainColor)
+
+                    } else {
+                        Text("**** \(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)")
                             .font(.system(size: 35))
                             .frame(maxWidth: 370, alignment: .leading)
                             .foregroundStyle(Color.MainColor)
                     }
+
+
+
                     
                     
                     Button {
@@ -70,6 +79,8 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(UserViewModel())
+        .environmentObject(TransactionViewModel())
 }
 
 

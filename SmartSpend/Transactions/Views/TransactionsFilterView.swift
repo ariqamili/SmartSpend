@@ -9,14 +9,15 @@ import SwiftUI
 
 struct TransactionsFilterView: View {
     @State private var showFilters = false
-    @StateObject private var viewModel = TransactionViewModel()
+    @EnvironmentObject var transactionVM: TransactionViewModel
+
     
     var body: some View {
         VStack(spacing: 12) {
             
             // Top bar
             HStack {
-                Text("\(viewModel.startDate.formatted(date: .abbreviated, time: .omitted)) - \(viewModel.endDate.formatted(date: .abbreviated, time: .omitted))")
+                Text("\(transactionVM.startDate.formatted(date: .abbreviated, time: .omitted)) - \(transactionVM.endDate.formatted(date: .abbreviated, time: .omitted))")
                     .font(.caption)
                 Spacer()
                 Button {
@@ -43,14 +44,14 @@ struct TransactionsFilterView: View {
             // Show this only if filter button is pressed
             if showFilters {
                 HStack {
-                    DatePicker("From", selection: $viewModel.startDate, displayedComponents: .date)
+                    DatePicker("From", selection: $transactionVM.startDate, displayedComponents: .date)
                         .labelsHidden()
-                    DatePicker("To", selection: $viewModel.endDate, displayedComponents: .date)
+                    DatePicker("To", selection: $transactionVM.endDate, displayedComponents: .date)
                         .labelsHidden()
                     
                     Button {
                         Task {
-                            await viewModel.fetchTransactions()
+                            await transactionVM.fetchTransactions()
                         }
                     } label: {
                         Text("Apply")
@@ -70,4 +71,5 @@ struct TransactionsFilterView: View {
 
 #Preview {
     TransactionsFilterView()
+        .environmentObject(TransactionViewModel())
 }

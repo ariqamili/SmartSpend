@@ -10,8 +10,11 @@ import SwiftUI
 
 struct AddIncomeView: View {
     
-    @StateObject private var viewModel = AddBottomSheetViewModel()
-    @StateObject private var categoryVM = CategoryViewModel()
+    @EnvironmentObject var transactionVM: TransactionViewModel
+    @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var categoryVM: CategoryViewModel
+    @ObservedObject var viewModel: AddBottomSheetViewModel
+
     
     var body: some View {
         NavigationStack {
@@ -79,8 +82,17 @@ struct AddIncomeView: View {
 
 
 #Preview {
-    AddIncomeView()
+    let transactionVM = TransactionViewModel()
+    let userVM = UserViewModel()
+    let categoryVM = CategoryViewModel()
+    let addVM = AddBottomSheetViewModel(
+        transactionVM: transactionVM,
+        userVM: userVM,
+        categoryVM: categoryVM
+    )
+
+    return AddIncomeView(viewModel: addVM)
+        .environmentObject(transactionVM)
+        .environmentObject(userVM)
+        .environmentObject(categoryVM)
 }
-
-
-

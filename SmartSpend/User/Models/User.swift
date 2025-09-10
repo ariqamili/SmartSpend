@@ -7,38 +7,25 @@
 
 import Foundation
 
-struct User: Codable, Identifiable {
-    let id: UUID
-    let firstName: String
-    let lastName: String
+struct User: Codable {
+    let first_name: String
+    let last_name: String
     let username: String
-    let googleEmail: String?
-    let appleEmail: String?
-    let refreshToken: String?
-    let refreshTokenExpiryDate: String?
-    let avatarURL: String?
-    let createdAt: Date
+    let google_email: String?
+    let apple_email: String?
+    let avatar_url: String?
     
-    let categories: [Category]
     let balance: Float
-    let monthlySavingGoal: Float
-    let preferredCurrency: String
+    let monthly_saving_goal: Float
+    let preferred_currency: Currency
     
+    enum Currency: String, CaseIterable, Identifiable, Codable{
+        
+        case MKD
+        case EUR
+        case USD
+        var id: Self { self }
+    }
+
     
-//    enum CodingKeys: String, CodingKey {
-//        case id = "Id"
-//        case firstName = "FirstName"
-//        case lastName = "LastName"
-//        case username = "Username"
-//        case googleEmail = "GoogleEmail"
-//        case appleEmail = "AppleEmail"
-//        case refreshToken = "RefreshToken"
-//        case refreshTokenExpiryDate = "RefreshTokenExpiryDate"
-//        case avatarURL = "AvatarURL"
-//        case createdAt = "CreatedAt"
-//        case categories = "Categories"
-//        case balance = "Balance"
-//        case monthlySavingGoal = "MonthlySavingGoal"
-//        case preferredCurrency = "PreferredCurrency"
-//    }
 }
