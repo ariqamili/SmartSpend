@@ -1,5 +1,4 @@
 import SwiftUI
-import PhotosUI
 
 struct EditAccountView: View {
     @Environment(\.dismiss) var dismiss
@@ -9,53 +8,73 @@ struct EditAccountView: View {
     @State private var lastName: String = ""
     @State private var username: String = ""
     @State private var avatarURL: String = ""
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    @State private var showAvatarPicker = false 
 
-    // Photo picker
-    @State private var selectedItem: PhotosPickerItem? = nil
-    @State private var selectedImage: UIImage? = nil
+    // Lorelei avatar seeds
+    let avatarSeeds: [String] = ["Alice","Bob","Charlie","Dana","Eli","Fiona","George","Hana","Ivan","Julia"]
+    var avatarOptions: [String] {
+        avatarSeeds.map { seed in
+            "https://api.dicebear.com/9.x/lorelei/png?seed=\(seed)"
+        }
+    }
 
     var body: some View {
         Form {
             Section("Avatar") {
                 VStack {
-                    if let image = selectedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .clipShape(Circle())
-                            .shadow(radius: 3)
-                    } else if let url = URL(string: avatarURL) {
+                    if let url = URL(string: avatarURL) {
                         AsyncImage(url: url) { phase in
                             switch phase {
-                            case .failure:
+                            case .failure(_):
                                 Image(systemName: "person.circle").font(.largeTitle)
                             case .success(let image):
-                                image.resizable()
+                                image.resizable().scaledToFill()
                             default:
                                 ProgressView()
                             }
                         }
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
+                        .shadow(radius: 3)
                     }
 
-                    PhotosPicker(
-                        selection: $selectedItem,
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
-                        Text("Change Photo")
-                            .foregroundStyle(Color.MainColor)
+                    Button("Choose Avatar") {
+                        withAnimation {
+                            showAvatarPicker.toggle()
+                        }
                     }
-                    .onChange(of: selectedItem) { oldValue, newValue in
-                        Task {
-                            if let data = try? await newValue?.loadTransferable(type: Data.self),
-                               let uiImage = UIImage(data: data) {
-                                selectedImage = uiImage
-                                // Optionally: convert to base64 string if backend accepts
-                                // avatarURL = "data:image/png;base64,\(data.base64EncodedString())"
+                    .foregroundStyle(Color.MainColor)
+
+                    if showAvatarPicker {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 15) {
+                                ForEach(avatarOptions, id: \.self) { option in
+                                    AsyncImage(url: URL(string: option)) { phase in
+                                        switch phase {
+                                        case .failure(_):
+                                            Image(systemName: "person.circle.fill")
+                                                .resizable()
+                                                .scaledToFill()
+                                        case .success(let image):
+                                            image.resizable().scaledToFill()
+                                        default:
+                                            ProgressView()
+                                        }
+                                    }
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle().stroke(avatarURL == option ? Color.MainColor : .clear, lineWidth: 3)
+                                    )
+                                    .onTapGesture {
+                                        avatarURL = option
+                                        showAvatarPicker = false
+                                    }
+                                }
                             }
+                            .padding(.vertical, 5)
                         }
                     }
                 }
@@ -74,16 +93,25 @@ struct EditAccountView: View {
                         first_name: firstName.isEmpty ? nil : firstName,
                         last_name: lastName.isEmpty ? nil : lastName,
                         username: username.isEmpty ? nil : username,
-                        avatar_url: avatarURL.isEmpty ? nil : avatarURL,
+                        avatar_url: avatarURL.isEmpty ? nil : avatarURL
                     )
                     await userVM.updateProfile(request)
                     dismiss()
+                    await userVM.fetchUser()
+                    
+                    alertMessage = "Profile updated successfully!"
+                    showAlert = true
                 }
             }
             .frame(maxWidth: .infinity)
             .padding()
             .foregroundStyle(.white)
             .listRowBackground(Color.MainColor)
+            .alert("Result", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { dismiss() }
+            } message: {
+                Text(alertMessage)
+            }
         }
         .navigationTitle("Edit Profile")
         .onAppear {
@@ -97,31 +125,8 @@ struct EditAccountView: View {
     }
 }
 
-
-
-//#Preview {
-//    let vm = UserViewModel()
-//    vm.currentUser = User(
-//        first_name: "Refik",
-//        last_name: "Jaija",
-//        username: "refikj",
-//        google_email: nil,
-//        apple_email: nil,
-//        avatar_url: "https://hws.dev/paul3.jpg",
-//        balance: 120,
-//        monthly_saving_goal: 50,
-//        preferred_currency: .EUR
-//    )
-//
-//    return NavigationStack {
-//        EditAccountView()
-//            .environmentObject(vm)   // ✅ inject the environment object
-//    }
-//}
-
-
 #Preview {
     EditAccountView()
         .environmentObject(UserViewModel())
-        
+
 }

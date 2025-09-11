@@ -39,19 +39,22 @@ struct AddBottomSheetView: View {
                 Spacer()
                 
                 if viewModel.selected == 1 {
-                    NavigationLink {
-                        AddIncomeView(viewModel: viewModel)
-                    } label: {
-                        HStack {
-                            Text("Add")
-                                .foregroundStyle(.white)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(Color.MainColor)
-                        .cornerRadius(12)
-                        .shadow(radius: 2)
-                    }
-                    .padding()
+//                    NavigationLink {
+//                        AddIncomeView(viewModel: viewModel)
+//                    } label: {
+//                        HStack {
+//                            Text("Add")
+//                                .foregroundStyle(.white)
+//                        }
+//                        .frame(maxWidth: .infinity, minHeight: 60)
+//                        .background(Color.MainColor)
+//                        .cornerRadius(12)
+//                        .shadow(radius: 2)
+//                    }
+//                    .padding()
+                    
+                    AddIncomeView(viewModel: viewModel)
+                    
                     
                 } else if viewModel.selected == 2 {
                     VStack {
@@ -59,33 +62,41 @@ struct AddBottomSheetView: View {
                             // camera action
                         }) {
                             HStack {
+                                Text("Take a picture")
+                                    .foregroundStyle(.gray)
                                 Image(systemName: "camera")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 40, height: 40)
                                     .foregroundStyle(.gray)
                             }
-                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .frame(maxWidth: 360, minHeight: 75)
                             .background(Color.white)
                             .cornerRadius(12)
-                            .shadow(radius: 2)
-                        }
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [6]))
+                                    .foregroundColor(.gray)
+                            )                        }
                         .padding()
                         
                         
-                        NavigationLink {
-                            AddExpenseView(viewModel: viewModel)
-                        } label: {
-                            HStack {
-                                Text("Add manually")
-                                    .foregroundStyle(.white)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 60)
-                            .background(Color.MainColor)
-                            .cornerRadius(12)
-                            .shadow(radius: 2)
-                        }
-                        .padding()
+//                        NavigationLink {
+//                            AddExpenseView(viewModel: viewModel)
+//                        } label: {
+//                            HStack {
+//                                Text("Add manually")
+//                                    .foregroundStyle(.white)
+//                            }
+//                            .frame(maxWidth: .infinity, minHeight: 60)
+//                            .background(Color.MainColor)
+//                            .cornerRadius(12)
+//                            .shadow(radius: 2)
+//                        }
+//                        .padding()
+                        AddExpenseView(viewModel: viewModel)
+                        
+                        
                     }
                 }
                 

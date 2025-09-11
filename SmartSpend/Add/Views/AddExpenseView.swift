@@ -13,23 +13,35 @@ struct AddExpenseView: View {
     @EnvironmentObject var userVM: UserViewModel
     @EnvironmentObject var categoryVM: CategoryViewModel
     @ObservedObject var viewModel: AddBottomSheetViewModel
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     
     var body: some View {
         NavigationStack {
             Form{
                 TextField("Title", text: $viewModel.expenseTitle)
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                    )
+
                     
 
                 Picker("Category", selection: $viewModel.expenseCategory){
-                    ForEach(categoryVM.categories2){ category in
+                    ForEach(categoryVM.categories){ category in
                         Text(category.name)
                             .tag(category.id)
                     }
-                }.foregroundStyle(Color.MainColor)
+                }
+                .foregroundStyle(Color.MainColor)
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 2)
+                )
+
                 
-                
-                TextField("Price", text: $viewModel.expensePrice)
+                TextField("Price:  \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)", text: $viewModel.expensePrice)
                     .keyboardType(.decimalPad)
                     .onChange(of: viewModel.expensePrice) { oldValue, newValue in
                         let filtered = newValue.filter { "0123456789.".contains($0) }
@@ -37,40 +49,56 @@ struct AddExpenseView: View {
                             viewModel.expensePrice = filtered
                         }
                     }
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                    )
+
 
                 DatePicker("Date", selection: $viewModel.expenseDate, displayedComponents: .date)
                     .foregroundStyle(Color.MainColor)
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                    )
+
+                
+                Button("Submit") {
+                    Task {
+                        let success = await viewModel.AddExpense()
+                        if success {
+                            alertMessage = "Expense added successfully!"
+                        } else {
+                            alertMessage = "Failed to add expense. Try again."
+                        }
+                        showAlert = true
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .foregroundStyle(.white)
+                .listRowBackground(Color.MainColor)
+                .alert("Result", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) {}
+                } message: {
+                    Text(alertMessage)
+                }
+
+                
+                
 
 
             }
             .listRowSpacing(20)
+            .scrollContentBackground(.hidden)
             
             
             
             
-            Button(action: {
-                Task{
-                    await viewModel.AddExpense()
-                }
-            }) {
-                HStack {
-                    Text("Submit")
-                        .foregroundStyle(.white)
-                }
-                .frame(maxWidth: .infinity, minHeight: 60)
-                .background(Color.MainColor)
-                .cornerRadius(12)
-                .shadow(radius: 2)
-            }
-            .padding()
             
-            
+
         }
         .toolbar{
-            ToolbarItem(placement: .principal) {
-                Text("Add Expense")
-                    .foregroundStyle(Color.MainColor)
-            }
             ToolbarItem(placement: .keyboard) {
                 Spacer()
             }

@@ -7,21 +7,6 @@
 
 import Foundation
 
-//struct Transaction: Identifiable, Codable {
-//    let id: UUID
-//    let title: String
-//    let amount: Double
-//    let date: Date
-//    let type: TransactionType
-//    let category: String? // optional for expenses
-//
-//    enum TransactionType: String, Codable {
-//        case income
-//        case expense
-//    }
-//
-//}
-
 struct Transaction: Identifiable, Codable {
     let id: Int64?
     let title: String

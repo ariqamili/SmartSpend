@@ -87,6 +87,7 @@ struct AccountView: View {
                         Task {
                             let request = UpdateUserRequest(preferred_currency: newValue)
                             await userVM.updateProfile(request)
+                            await userVM.fetchUser()
                         }
                     }
                 }
