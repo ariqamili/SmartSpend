@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TransactionPartialView: View {
     @EnvironmentObject var transactionVM: TransactionViewModel
+    @EnvironmentObject var userVM: UserViewModel
 
     var body: some View {
         
@@ -37,6 +38,9 @@ struct TransactionPartialView: View {
                             .foregroundStyle(.green)
                             .frame(alignment: .leading)
                         
+                        Text(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
+                            .foregroundStyle(.green)
+                        
                     }
                     else{
                         Image(systemName: "arrow.up.forward").foregroundStyle(.red)
@@ -49,6 +53,10 @@ struct TransactionPartialView: View {
                             .foregroundStyle(.red)
                             .frame(alignment: .leading)
                         
+                        Text(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
+                            .foregroundStyle(.red)
+
+                        
                     }
                     
                 }
@@ -60,10 +68,9 @@ struct TransactionPartialView: View {
             .listRowSpacing(10)
             
         }
-//        .task {
-//            // Fetch transactions on appear
-//            await viewModel.fetchTransactions()
-//        }
+        .task {
+            await transactionVM.fetchTransactions()
+        }
 
     }
 }
@@ -71,4 +78,5 @@ struct TransactionPartialView: View {
 #Preview {
     TransactionPartialView()
         .environmentObject(TransactionViewModel())
+        .environmentObject(UserViewModel())
 }

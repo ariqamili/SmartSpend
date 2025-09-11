@@ -26,10 +26,15 @@ class CategoryViewModel: ObservableObject {
         Category(id: 12, name: "Gifts"),
         Category(id: 13, name: "Other")
     ]
+    
+    struct CategoryResponse: Codable {
+        let data: [Category]
+    }
 
     func fetchCategories() async {
         do {
-            self.categories = try await APIClient.shared.request(endpoint: "api/category")
+            let response: CategoryResponse = try await APIClient.shared.request(endpoint: "api/category")
+            self.categories = response.data
         } catch {
             print("Failed to fetch categories:", error)
         }

@@ -16,7 +16,7 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 20) {
             Spacer()
-            Text("Welcom to Smart Spend")
+            Text("Welcome to Smart Spend")
                 .font(.system(size: 40))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(Color.MainColor)
@@ -26,10 +26,6 @@ struct LoginView: View {
                 .foregroundStyle(.gray)
             
             Spacer()
-
-//            GoogleSignInButton(action: authVM.signIn)
-//                .frame(height: 50)
-//                .padding()
   
             Button(action: {
                 authVM.signIn(userVM: userVM)

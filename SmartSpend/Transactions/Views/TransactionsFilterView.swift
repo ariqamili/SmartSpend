@@ -63,7 +63,7 @@ struct TransactionsFilterView: View {
                     .shadow(radius: 2)
                 }
                 .padding()
-                .transition(.opacity.combined(with: .move(edge: .top))) // smooth animation
+                .transition(.opacity.combined(with: .move(edge: .top))) 
             }
         }
     }

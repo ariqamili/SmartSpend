@@ -14,14 +14,23 @@ struct AddIncomeView: View {
     @EnvironmentObject var userVM: UserViewModel
     @EnvironmentObject var categoryVM: CategoryViewModel
     @ObservedObject var viewModel: AddBottomSheetViewModel
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     
     var body: some View {
         NavigationStack {
             Form{
                 TextField("Title", text: $viewModel.incomeTitle)
+                    .padding(8)
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                    )
+ 
                 
-                TextField("Price", text: $viewModel.incomePrice)
+                
+                TextField("Price:  \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)", text: $viewModel.incomePrice)
                     .keyboardType(.decimalPad)
                     .onChange(of: viewModel.incomePrice) { oldValue, newValue in
                         let filtered = newValue.filter { "0123456789.".contains($0) }
@@ -29,40 +38,55 @@ struct AddIncomeView: View {
                             viewModel.incomePrice = filtered
                         }
                     }
+                    .padding(8)
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                    )
+
 
                 DatePicker("Date", selection: $viewModel.incomeDate, displayedComponents: .date)
                     .foregroundStyle(Color.MainColor)
+                    .padding(4)
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                    )
+
+                Spacer()
+                Spacer()
+                
+                Button("Submit") {
+                    Task {
+                        let success = await viewModel.AddIncome()
+                        if success {
+                            alertMessage = "Income added successfully!"
+                        } else {
+                            alertMessage = "Failed to add income. Try again."
+                        }
+                        showAlert = true
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .foregroundStyle(.white)
+                .listRowBackground(Color.MainColor)
+                .alert("Result", isPresented: $showAlert) {
+                    Button("OK", role: .cancel) {}
+                } message: {
+                    Text(alertMessage)
+                }
+
 
 
             }
             .listRowSpacing(20)
+            .scrollContentBackground(.hidden)
             
-            
-            
-            
-            Button(action: {
-                Task{
-                    await viewModel.AddIncome()
-                }
-            }) {
-                HStack {
-                    Text("Submit")
-                        .foregroundStyle(.white)
-                }
-                .frame(maxWidth: .infinity, minHeight: 60)
-                .background(Color.MainColor)
-                .cornerRadius(12)
-                .shadow(radius: 2)
-            }
-            .padding()
-            
+
             
         }
         .toolbar{
-            ToolbarItem(placement: .principal) {
-                Text("Add Income")
-                    .foregroundStyle(Color.MainColor)
-            }
             ToolbarItem(placement: .keyboard) {
                 Spacer()
             }

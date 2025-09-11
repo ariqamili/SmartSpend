@@ -40,20 +40,26 @@ class AddBottomSheetViewModel: ObservableObject {
     @Published var incomeCategory: Category = .init(id: 2, name: "")
     @Published var incomePrice: String = ""
     var incomePriceBool: Double {
-        Double(expensePrice) ?? 0.0
+        Double(incomePrice) ?? 0.0
     }
     @Published var incomeDate: Date = Date()
         
     
     
-    func AddExpense() async {
+    func AddExpense() async -> Bool{
 
         await transactionVM.addTransaction(title: expenseTitle, price: expensePriceBool, date_made: expenseDate, type: .expense, category_id: expenseCategory)
+        await userVM.fetchUser()
+        
+        return true
     }
     
-    func AddIncome() async {
+    func AddIncome() async -> Bool{
 
         await transactionVM.addTransaction(title: incomeTitle, price: incomePriceBool, date_made: incomeDate, type: .income, category_id: nil)
+        await userVM.fetchUser()
+        
+        return true
     }
 
  

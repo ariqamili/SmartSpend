@@ -3,7 +3,6 @@ import SwiftUI
 enum TabKey: Hashable { case home, add, account }
 
 struct ContentView: View {
-    @EnvironmentObject var authVM: AuthenticationViewModel
     @EnvironmentObject var userVM: UserViewModel
     @EnvironmentObject var categoryVM: CategoryViewModel
     @EnvironmentObject var transactionVM: TransactionViewModel
@@ -12,35 +11,7 @@ struct ContentView: View {
     @State private var lastNonAddSelection: TabKey = .home
     @State private var showAddSheet = false
     
-    
     var body: some View {
-        Group {
-            if authVM.isSignedIn {
-                mainTabView
-            } else {
-                LoginView()
-            }
-            
-        }
-        .onChange(of: authVM.isSignedIn) { oldValue, newValue in
-            if newValue {
-                Task {
-                    await userVM.fetchUser()
-                    print("The current user: \(String(describing: userVM.currentUser))")
-                   // await categoryVM.fetchCategories()
-                }
-            } else {
-                // Clear cached user on sign out
-                userVM.currentUser = nil
-            }
-
-        }
-
-    }
-    
-    
-    
-    private var mainTabView: some View {
         TabView(selection: $selection) {
             HomeView()
                 .tabItem {
@@ -70,14 +41,20 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showAddSheet) {
-            AddBottomSheetView(transactionVM: transactionVM, userVM: userVM, categoryVM: categoryVM)
-                .environmentObject(transactionVM)
-                .environmentObject(userVM)
-                .environmentObject(categoryVM)
-                .presentationDetents([.medium, .large])
+            AddBottomSheetView(
+                transactionVM: transactionVM,
+                userVM: userVM,
+                categoryVM: categoryVM
+            )
+            .environmentObject(transactionVM)
+            .environmentObject(userVM)
+            .environmentObject(categoryVM)
+            .presentationDetents([.fraction(0.77), .large])
+        }
+        .task {
+            await categoryVM.fetchCategories()
         }
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -86,6 +63,5 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(UserViewModel())
             .environmentObject(CategoryViewModel())
             .environmentObject(TransactionViewModel())
-            .environmentObject(AuthenticationViewModel())
     }
 }

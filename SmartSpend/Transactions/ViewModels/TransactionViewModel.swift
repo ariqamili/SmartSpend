@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class TransactionViewModel: ObservableObject{
     
     @Published var transactions: [Transaction] =  []
@@ -30,7 +31,7 @@ class TransactionViewModel: ObservableObject{
     }
     
     init() {
-        loadFakeData()
+//        loadFakeData()
     }
     
     func loadFakeData(){
@@ -93,33 +94,41 @@ class TransactionViewModel: ObservableObject{
     }
     
     
+    struct ResponseTransaction: Codable{
+       var data: [Transaction]
+    }
     
     
     func fetchTransactions() async {
         do {
             let calendar = Calendar.current
-            let today = calendar.startOfDay(for: endDate)
             let start = calendar.startOfDay(for: startDate)
+
+            let startOfNextDay = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: endDate))!
+            let end = startOfNextDay.addingTimeInterval(-0.001)
 
             let formatter = ISO8601DateFormatter()
             formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
-            let endpoint = "/transactions?from=\(formatter.string(from: start))&to=\(formatter.string(from: today))"
+            let endpoint = "api/transaction?from=\(formatter.string(from: start))&to=\(formatter.string(from: end))"
 
-            let result: [Transaction] = try await APIClient.shared.request(endpoint: endpoint)
-            self.transactions = result
+            let result: ResponseTransaction = try await APIClient.shared.request(endpoint: endpoint)
+            self.transactions = result.data
         } catch {
             print("Transaction could not be fetched", error)
         }
     }
+
     
     
     
     func fetchTransactionsNoTime() async{
         do{
-            let result: [Transaction] = try await APIClient.shared.request(endpoint: "/transactions")
+            let endpoint = "api/transaction"
+            let result: ResponseTransaction = try await APIClient.shared.request(endpoint: endpoint)
+
+            self.transactions = result.data
             
-            self.transactions = result
         }
         catch{
             
@@ -142,16 +151,58 @@ class TransactionViewModel: ObservableObject{
         
         do {
             let _: Transaction = try await APIClient.shared.request(
-                endpoint: "/transactions",
+                endpoint: "api/transaction",
                 method: "POST",
                 body: newTransaction
             )
             
-            await fetchTransactions()
+            await fetchTransactionsNoTime()
         } catch {
             print("Transaction could not be added:", error)
         }
     }
+    
+    func editTransaction(
+        id: Int64,
+        title: String? = nil,
+        price: Double? = nil,
+        date_made: Date? = nil,
+        category_id: Int64? = nil
+    ) async {
+        let request = UpdateTransactionRequest(
+            title: title,
+            price: price,
+            date_made: date_made,
+            category_id: category_id
+        )
+        
+        do {
+            let _: Transaction = try await APIClient.shared.request(
+                endpoint: "api/transaction/\(id)",
+                method: "PATCH",
+                body: request
+            )
+            
+        } catch {
+            print("Transaction could not be edited:", error)
+        }
+    }
+    
+    
+    func deleteTransaction(id: Int64) async {
+        
+        do {
+            let _: Transaction = try await APIClient.shared.request(
+                endpoint: "api/transaction/\(id)",
+                method: "DELETE"
+            )
+            
+        } catch {
+            print("Transaction could not be edited:", error)
+        }
+    }
+
+
 
     
     
