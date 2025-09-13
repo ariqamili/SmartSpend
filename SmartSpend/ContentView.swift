@@ -15,12 +15,12 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if authVM.isSignedIn {
-                mainTabView
-            } else {
-                LoginView()
+//            if authVM.isSignedIn {
+                StartingScreenView(signedIn: true)
+//            } else {
+//                StartingScreenView(signedIn: false)
 //                Test()
-            }
+//            }
             
         }
         .onChange(of: authVM.isSignedIn) { oldValue, newValue in

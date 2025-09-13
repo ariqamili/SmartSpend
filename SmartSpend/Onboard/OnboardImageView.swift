@@ -416,7 +416,7 @@ struct OnboardImageView: View {
             
             Spacer()
             
-            HStack(spacing: 20) {
+            HStack(spacing: 100) {
                 if data.showBackButton {
                     Button(action: {
                         userResponseBack?(inputText, true)
@@ -455,10 +455,6 @@ struct OnboardImageView: View {
 
 struct OnboardImageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardImageView(data: .preferredCurrency)
-            .preferredColorScheme(.light)
-        
-//        OnboardImageView(data: .preferredCurrency)
-//            .preferredColorScheme(.dark)
+        OnboardImageView(data: .currentBalance)
     }
 }

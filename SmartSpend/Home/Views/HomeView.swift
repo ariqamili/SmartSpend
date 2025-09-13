@@ -1,3 +1,93 @@
+//////
+//////  HomeView.swift
+//////  SmartSpend
+//////
+//////  Created by Refik Jaija on 17.8.25.
+//////
+//
+//import SwiftUI
+//
+//struct HomeView: View {
+//    @StateObject private var viewModel = HomeViewModel()
+//    @EnvironmentObject var userVM: UserViewModel
+//    
+//
+//    var body: some View {
+//        
+//        SmartSpendNavigationView(){
+//            VStack{
+//                Text("Your Balance")
+//                    .font(.caption)
+//                    .frame(maxWidth: 370, alignment: .leading)
+//                    .foregroundStyle(.gray)                
+//                HStack{
+//                    
+//                    if viewModel.show {
+//                        Text(
+//                            userVM.currentUser?.balance.formatted(
+//                                .currency(code: userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
+//                            ) ?? "****"
+//                        )
+//                        .font(.system(size: 35))
+//                        .frame(maxWidth: 370, alignment: .leading)
+//                        .foregroundStyle(Color.MainColor)
+//
+//                    } else {
+//                        Text("**** \(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)")
+//                            .font(.system(size: 35))
+//                            .frame(maxWidth: 370, alignment: .leading)
+//                            .foregroundStyle(Color.MainColor)
+//                    }
+//
+//
+//
+//                    
+//                    
+//                    Button {
+//                        viewModel.toggleVisibility()
+//                    } label: {
+//                        if viewModel.show{
+//                            Image(systemName:"eye.slash")
+//                                .foregroundStyle(.gray)
+//                        } else{
+//                            Image(systemName:"eye")
+//                                .foregroundStyle(.gray)
+//                        }
+//                    
+//                        
+//                    }
+//
+//                }
+//                .padding(.horizontal)
+//                
+//        
+//        
+//                TransactionPartialView()
+//    
+//                SavingGoalRectangle(isOnHomeScreen: true)
+//                
+//                
+//                StatsView()
+//                
+//            }
+//        }
+//        
+//        
+//    }
+//    
+//}
+//
+//#Preview {
+//    HomeView()
+//        .environmentObject(UserViewModel())
+//        .environmentObject(TransactionViewModel())
+//}
+//
+//
+//
+
+
+
 ////
 ////  HomeView.swift
 ////  SmartSpend
@@ -15,66 +105,60 @@ struct HomeView: View {
     var body: some View {
         
         SmartSpendNavigationView(){
-            VStack{
-                Text("Your Balance")
-                    .font(.caption)
-                    .frame(maxWidth: 370, alignment: .leading)
-                    .foregroundStyle(.gray)                
-                HStack{
+            ScrollView {
+                VStack(spacing: 20) {
                     
-                    if viewModel.show {
-                        Text(
-                            userVM.currentUser?.balance.formatted(
-                                .currency(code: userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
-                            ) ?? "****"
-                        )
-                        .font(.system(size: 35))
-                        .frame(maxWidth: 370, alignment: .leading)
-                        .foregroundStyle(Color.MainColor)
-
-                    } else {
-                        Text("**** \(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)")
-                            .font(.system(size: 35))
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Your Balance")
+                            .font(.caption)
                             .frame(maxWidth: 370, alignment: .leading)
-                            .foregroundStyle(Color.MainColor)
-                    }
-
-
-
-                    
-                    
-                    Button {
-                        viewModel.toggleVisibility()
-                    } label: {
-                        if viewModel.show{
-                            Image(systemName:"eye.slash")
-                                .foregroundStyle(.gray)
-                        } else{
-                            Image(systemName:"eye")
-                                .foregroundStyle(.gray)
-                        }
-                    
+                            .foregroundStyle(.gray)
                         
-                    }
+                        HStack {
+                            if viewModel.show {
+                                Text(
+                                    userVM.currentUser?.balance.formatted(
+                                        .currency(code: userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
+                                    ) ?? "****"
+                                )
+                                .font(.system(size: 35))
+                                .frame(maxWidth: 370, alignment: .leading)
+                                .foregroundStyle(Color.MainColor)
 
+                            } else {
+                                Text("**** \(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)")
+                                    .font(.system(size: 35))
+                                    .frame(maxWidth: 370, alignment: .leading)
+                                    .foregroundStyle(Color.MainColor)
+                            }
+                            
+                            Spacer()
+                            
+                            Button {
+                                viewModel.toggleVisibility()
+                            } label: {
+                                if viewModel.show {
+                                    Image(systemName:"eye.slash")
+                                        .foregroundStyle(.gray)
+                                } else {
+                                    Image(systemName:"eye")
+                                        .foregroundStyle(.gray)
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    
+                    TransactionPartialView()
+                    
+                    SavingGoalRectangle(isOnHomeScreen: true)
+                    
+                    PieChart(isOnHomeView: true)
                 }
-                .padding(.horizontal)
-                
-        
-        
-                TransactionPartialView()
-    
-                SavingGoalRectangle(isOnHomeScreen: true)
-                
-                
-                StatsView()
-                
             }
+            .background(Color.sideColor)
         }
-        
-        
     }
-    
 }
 
 #Preview {
@@ -82,6 +166,3 @@ struct HomeView: View {
         .environmentObject(UserViewModel())
         .environmentObject(TransactionViewModel())
 }
-
-
-
