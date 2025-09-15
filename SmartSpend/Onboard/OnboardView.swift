@@ -52,6 +52,7 @@ struct OnboardView: View {
     @State var isOnboarded: Bool = false
     
     @State private var currentPage = 0
+    var onBoardComplited: Bool = false
     
     var viewModel: OnboardingViewModel = OnboardingViewModel(
         userOnboardingData: .init(
@@ -62,62 +63,114 @@ struct OnboardView: View {
     )
     
     var body: some View {
-        TabView(selection: $currentPage) {
-            OnboardImageView(
-                data: .preferredCurrency,
-                userResponse: { input, _ in
-                    viewModel.updatePreferredCurrency(input)
-                    print(input)
-                    withAnimation {
-                        currentPage += 1
+        VStack{
+            TabView(selection: $currentPage) {
+                OnboardImageView(
+                    data: .preferredCurrency,
+                    userResponse: { input, _ in
+                        viewModel.updatePreferredCurrency(input)
+                        print(input)
+                        withAnimation {
+                            currentPage += 1
+                        }
+                    })
+                .tag(0)
+                
+                OnboardImageView(
+                    data: .savingGoal,
+                    userResponse: { input, _ in
+                        viewModel.updateSavingGoal(input)
+                        print(input)
+                        withAnimation {
+                            currentPage += 1
+                        }
+                    },
+                    userResponseBack: { input, _ in
+                        viewModel.updateSavingGoal(input)
+                        print(input)
+                        withAnimation {
+                            currentPage -= 1
+                        }
                     }
-            })
-            .tag(0)
+                )
+                .tag(1)
+                
+                OnboardImageView(
+                    data: .currentBalance,
+                    userResponse: { input, _ in
+                        viewModel.updateCurrentBalance(input)
+                        print(input)
+                        withAnimation {
+                            currentPage += 1
+                        }
+                    },
+                    userResponseBack: { input, _ in
+                        viewModel.updateCurrentBalance(input)
+                        print(input)
+                        withAnimation {
+                            currentPage -= 1
+                        }
+                    })
+                .tag(2)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .background(Color.sideColor)
             
-            OnboardImageView(
-                data: .savingGoal,
-                userResponse: { input, _ in
-                    viewModel.updateSavingGoal(input)
-                    print(input)
-                    withAnimation {
-                        currentPage += 1
-                    }
-            },
-            userResponseBack: { input, _ in
-                viewModel.updateSavingGoal(input)
-                print(input)
-                withAnimation {
-                    currentPage -= 1
+            HStack (spacing: 12){
+                ForEach(0..<3, id: \.self) { index in
+                    Circle()
+                        .fill(currentPage == index ? Color.MainColor : Color.gray.opacity(0.5))
+                        .frame(width: currentPage == index ? 12 : 8, height: currentPage == index ? 12 : 8)
+                        .animation(.spring(response: 0.25), value: currentPage)
+//                        .animation(.snappy(duration: 0.25, extraBounce: 0.5), value: currentPage)
                 }
-                }
-            )
-            .tag(1)
+            }
+            .padding(.top, 10)
             
-            OnboardImageView(
-                data: .currentBalance,
-                userResponse: { input, _ in
-                    viewModel.updateCurrentBalance(input)
-                    print(input)
-                withAnimation {
-                    currentPage += 1
-                }
-            },
-                userResponseBack: { input, _ in
-                    viewModel.updateCurrentBalance(input)
-                    print(input)
+            HStack(spacing: 100) {
+                    if currentPage != 0 {
+                Button(action: {
                     withAnimation {
                         currentPage -= 1
                     }
-                    })
-            .tag(2)
+                }) {
+                    Text("Back")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(15)
+                                    }
+                }
+                
+                Button(action: {
+                    //                if data.showTextField {
+                    //                    userResponse?(inputText, true)
+                    //                } else {
+                    //                    userResponse?(selectedCurrency.title, true)
+                    //                }
+                    withAnimation {
+                        currentPage += 1
+                    }
+                }) {
+                    Text(currentPage == 2 ? "Finish" : "Next")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.MainColor)
+                        .cornerRadius(15)
+                }
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 15)
         }
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
         .background(Color.sideColor)
     }
 }
 
 
 #Preview {
-    OnboardView()
+    OnboardView(onBoardComplited: false)
 }

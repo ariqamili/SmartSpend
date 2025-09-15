@@ -60,8 +60,15 @@ struct PieChart: View {
             }
             .chartLegend(.hidden)
             .frame(height: 320)
-            .padding(.horizontal)
+            .padding()
         }
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.MainColor.opacity(0.2))
+//                .stroke(Color.MainColor, lineWidth: 1)
+                .padding(.horizontal)
+            
+        )
         .frame(maxWidth: .infinity)
     }
 }

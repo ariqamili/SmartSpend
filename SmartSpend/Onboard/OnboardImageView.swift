@@ -379,28 +379,32 @@ struct OnboardImageView: View {
                     print("Skip")
                 })
                 .foregroundColor(.black)
-                .padding()
+                .padding(.trailing, 27)
+                .padding(.vertical)
             }
             
             Text(data.title)
+                .foregroundColor(.black)
                 .font(.system(size: 49))
                 .fontWeight(.semibold)
-                .padding(.horizontal, 50)
+                .padding(.horizontal, 40)
             
             Text(data.description)
+                .foregroundColor(.black)
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .padding()
+//                .padding()
             
             Image(data.imageName)
                 .resizable()
-                .frame(width: 420, height: 290)
+                .frame(width: 420, height: 280)
             
             if data.showTextField {
                 TextField(data.textFieldPlaceholder, text: $inputText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 20)
                     .keyboardType(.decimalPad)
+                    .preferredColorScheme(.light)
             } else {
                 HStack(spacing: 16) {
                     ForEach(ButtonType.allCases) { type in
@@ -411,50 +415,52 @@ struct OnboardImageView: View {
                         }
                     }
                 }
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 25)
             }
             
             Spacer()
             
-            HStack(spacing: 100) {
-                if data.showBackButton {
-                    Button(action: {
-                        userResponseBack?(inputText, true)
-                    }) {
-                        Text("Back")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(15)
-                    }
-                }
-                
-                Button(action: {
-                    if data.showTextField {
-                        userResponse?(inputText, true)
-                    } else {
-                        userResponse?(selectedCurrency.title, true)
-                    }
-                }) {
-                    Text("Next")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.MainColor)
-                        .cornerRadius(15)
-                }
-            }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 40)
         }
+        .frame(maxHeight: .infinity)
     }
 }
 
 struct OnboardImageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardImageView(data: .currentBalance)
+        OnboardImageView(data: .preferredCurrency)
     }
 }
+
+//            HStack(spacing: 100) {
+//                if data.showBackButton {
+//                    Button(action: {
+//                        userResponseBack?(inputText, true)
+//                    }) {
+//                        Text("Back")
+//                            .font(.headline)
+//                            .foregroundColor(.white)
+//                            .frame(maxWidth: .infinity)
+//                            .padding()
+//                            .background(Color.red)
+//                            .cornerRadius(15)
+//                    }
+//                }
+//
+//                Button(action: {
+//                    if data.showTextField {
+//                        userResponse?(inputText, true)
+//                    } else {
+//                        userResponse?(selectedCurrency.title, true)
+//                    }
+//                }) {
+//                    Text("Next")
+//                        .font(.headline)
+//                        .foregroundColor(.white)
+//                        .frame(maxWidth: .infinity)
+//                        .padding()
+//                        .background(Color.MainColor)
+//                        .cornerRadius(15)
+//                }
+//            }
+//            .padding(.horizontal, 10)
+//            .padding(.vertical, 40)

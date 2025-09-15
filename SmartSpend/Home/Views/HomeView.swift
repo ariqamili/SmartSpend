@@ -100,6 +100,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var transactionVM: TransactionViewModel
     
 
     var body: some View {
@@ -114,6 +115,7 @@ struct HomeView: View {
                             .frame(maxWidth: 370, alignment: .leading)
                             .foregroundStyle(.gray)
                         
+//                            .padding(.leading)
                         HStack {
                             if viewModel.show {
                                 Text(
@@ -146,8 +148,9 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal)
+                        .padding(.trailing)
                     }
+                    .padding(.leading)
                     
                     TransactionPartialView()
                     
@@ -156,7 +159,6 @@ struct HomeView: View {
                     PieChart(isOnHomeView: true)
                 }
             }
-            .background(Color.sideColor)
         }
     }
 }

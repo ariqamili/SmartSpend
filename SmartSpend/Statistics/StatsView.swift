@@ -31,7 +31,6 @@ struct StatsView: View {
             
             Spacer()
         }
-        .background(Color.sideColor)
     }
 
 }

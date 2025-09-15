@@ -1,5 +1,5 @@
 //
-//  SplashScreenView.swift
+//  StartingScreenView.swift
 //  SmartSpend
 //
 //  Created by shortcut mac on 5.9.25.
@@ -29,7 +29,7 @@ struct StartingScreenView: View {
     @State private var logoScale: CGFloat = 0.8
     @State private var logoOpacity: Double = 0.3
     @State private var textOffset: CGFloat = 50
-    var signedIn: Bool
+    var switchingView: any View
     
     var body: some View {
         ZStack {
@@ -74,19 +74,13 @@ struct StartingScreenView: View {
                 .transition(.opacity)
                 
             } else {
-                if !signedIn{
-                    LoginView()
-                        .transition(.opacity)
-                }
-                else {
-                    HomeView()
-                        .transition(.opacity)
-                }
+                AnyView(switchingView)
+//                    .transition(.opacity)
             }
         }
     }
 }
 
 #Preview {
-    StartingScreenView(signedIn: false)
+    StartingScreenView(switchingView: LoginView())
 }

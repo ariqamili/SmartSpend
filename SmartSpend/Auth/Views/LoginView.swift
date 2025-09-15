@@ -12,7 +12,8 @@ struct LoginView: View {
     @EnvironmentObject var authVM: AuthenticationViewModel
     @EnvironmentObject var userVM: UserViewModel
 
-
+    var isSignedIn: Bool = false
+    
     var body: some View {
         VStack(spacing: 20) {
             Spacer()
