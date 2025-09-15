@@ -66,7 +66,8 @@ struct TransactionPartialView: View {
             .contentMargins(.vertical, 0)
             .scrollContentBackground(.hidden)
             .listRowSpacing(10)
-            .frame(maxWidth: .infinity, maxHeight: 180)
+            .frame(height: 180)
+            .scrollDisabled(true)
             
         }
         .task {
