@@ -31,7 +31,7 @@ class TransactionViewModel: ObservableObject{
     }
     
     init() {
-//        loadFakeData()
+        loadFakeData()
     }
     
     func loadFakeData(){

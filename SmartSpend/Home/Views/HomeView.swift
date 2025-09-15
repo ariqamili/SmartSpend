@@ -62,6 +62,8 @@ struct HomeView: View {
         
         
                TransactionPartialView()
+                
+               SavingsPartialView()
     
                 
                 
