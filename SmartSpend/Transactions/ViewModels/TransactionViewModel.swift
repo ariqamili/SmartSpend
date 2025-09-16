@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 @MainActor
 class TransactionViewModel: ObservableObject{
@@ -161,6 +162,46 @@ class TransactionViewModel: ObservableObject{
             print("Transaction could not be added:", error)
         }
     }
+    
+    
+    func addTransactionWithReceipt(
+        title: String,
+        price: Double,
+        date_made: Date,
+        type: Transaction.TransactionType,
+        category_id: Int64? = nil,
+        receiptImage: UIImage
+    ) async {
+        do {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+            var params: [String: String] = [
+                "title": title,
+                "price": String(price),
+                "date_made": formatter.string(from: date_made),
+                "type": type.rawValue
+            ]
+            
+            if let category_id = category_id {
+                params["category_id"] = String(category_id)
+            }
+            
+            let _: Transaction = try await APIClient.shared.uploadMultipart(
+                endpoint: "api/transaction/receipt",
+                image: receiptImage,
+                imageFieldName: "image", // make sure this matches backend!
+                parameters: params
+            )
+            
+            await fetchTransactionsNoTime()
+        } catch {
+            print("Transaction with receipt could not be added:", error)
+        }
+    }
+
+    
+    
     
     func editTransaction(
         id: Int64,

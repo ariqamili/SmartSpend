@@ -49,7 +49,7 @@ struct ContentView: View {
             .environmentObject(transactionVM)
             .environmentObject(userVM)
             .environmentObject(categoryVM)
-            .presentationDetents([.fraction(0.77), .large])
+            .presentationDetents([.fraction(0.72), .large])
         }
         .task {
             await categoryVM.fetchCategories()

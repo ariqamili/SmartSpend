@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUICore
+import UIKit
 
 
 
@@ -44,6 +45,21 @@ class AddBottomSheetViewModel: ObservableObject {
     }
     @Published var incomeDate: Date = Date()
         
+    
+    
+    func AddExpenseWithReceipt(receiptImage: UIImage) async -> Bool {
+        await transactionVM.addTransactionWithReceipt(
+            title: expenseTitle,
+            price: expensePriceBool,
+            date_made: expenseDate,
+            type: .expense,
+            category_id: expenseCategory,
+            receiptImage: receiptImage
+        )
+        await userVM.fetchUser()
+        return true
+    }
+
     
     
     func AddExpense() async -> Bool{

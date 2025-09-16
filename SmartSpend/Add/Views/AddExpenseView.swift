@@ -15,6 +15,7 @@ struct AddExpenseView: View {
     @ObservedObject var viewModel: AddBottomSheetViewModel
     @State private var showAlert = false
     @State private var alertMessage = ""
+    
 
     
     var body: some View {
@@ -75,7 +76,7 @@ struct AddExpenseView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(10)
                 .foregroundStyle(.white)
                 .listRowBackground(Color.MainColor)
                 .alert("Result", isPresented: $showAlert) {
