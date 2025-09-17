@@ -157,6 +157,16 @@ struct HomeView: View {
                     SavingGoalRectangle(isOnHomeScreen: true)
                     
                     PieChart(isOnHomeView: true)
+                    
+                    Button("Clear Onboard completed") {
+                        userVM.resetOnboardingStatus()
+                    }
+                    .foregroundStyle(.black)
+                    .bold()
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    
                 }
             }
         }

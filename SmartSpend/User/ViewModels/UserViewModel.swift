@@ -23,8 +23,13 @@ import Foundation
 class UserViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var isOnboarded = false
-//    @Published var errorMessage = false
 
+    private let onboardingKey = "hasCompletedOnboarding"
+    
+    init() {
+            loadOnboardingStatus()
+        }
+   
     func fetchUser() async {
         do {
             let response: UserResponse = try await APIClient.shared.request(endpoint: "api/user/me")
@@ -60,8 +65,26 @@ class UserViewModel: ObservableObject {
     }
     
     func completeOnboarding() {
-        DispatchQueue.main.async {
-            self.isOnboarded = true
-        }
+//        DispatchQueue.main.async {
+//            self.isOnboarded = true
+//        }
+        
+        isOnboarded = true
+                // Persist this state so user doesn't see onboarding again
+                UserDefaults.standard.set(true, forKey: onboardingKey)
+                print("Onboarding completed and saved to UserDefaults")
     }
+    
+    private func loadOnboardingStatus() {
+            isOnboarded = UserDefaults.standard.bool(forKey: onboardingKey)
+            print("Loaded onboarding status: \(isOnboarded)")
+        }
+    
+    func resetOnboardingStatus() {
+            // For testing purposes or if user wants to redo onboarding
+            isOnboarded = false
+            UserDefaults.standard.removeObject(forKey: onboardingKey)
+            print("Onboarding status reset")
+        }
+    
 }
