@@ -16,7 +16,7 @@ struct EditSavingGoalView: View {
             Form{
                 
             Section("Enter new goal") {
-                TextField("Goal: \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)", text: $newGoal)
+                TextField("Goal: \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)" as String, text: $newGoal)
                     .keyboardType(.decimalPad)
                     .onChange(of: newGoal) { oldValue, newValue in
                         let filtered = newValue.filter { "0123456789.".contains($0) }

@@ -46,7 +46,7 @@ struct EditTransactionView: View {
                     }
                     
                     
-                    TextField("Price:  \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)", text: $price)
+                    TextField("Price:  \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)" as String, text: $price)
                         .keyboardType(.decimalPad)
                         .onChange(of: price) { oldValue, newValue in
                             let filtered = newValue.filter { "0123456789.".contains($0) }

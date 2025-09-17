@@ -50,7 +50,7 @@ struct SavingFullView: View {
                     }
                 
                 ForEach(saveMonths){ saveMonths in
-                    BarMark(x: .value("Month", saveMonths.date),
+                    AreaMark(x: .value("Month", saveMonths.date),
                             y: .value("Saved", saveMonths.savedForMonth)
                     )
                     .foregroundStyle(Color.MainColor.gradient)

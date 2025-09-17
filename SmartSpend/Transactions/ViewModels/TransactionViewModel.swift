@@ -32,7 +32,7 @@ class TransactionViewModel: ObservableObject{
     }
     
     init() {
-        loadFakeData()
+//        loadFakeData()
     }
     
     func loadFakeData(){
@@ -75,7 +75,7 @@ class TransactionViewModel: ObservableObject{
            ),
            Transaction(
                id: 5,
-               title: "Freelance Project",
+               title: "Freelance Project Freelance Project",
                price: 600,
                date_made: Date().addingTimeInterval(-86400 * 3), // 3 days ago
                category_id: 5,
@@ -163,43 +163,21 @@ class TransactionViewModel: ObservableObject{
         }
     }
     
-    
-    func addTransactionWithReceipt(
-        title: String,
-        price: Double,
-        date_made: Date,
-        type: Transaction.TransactionType,
-        category_id: Int64? = nil,
-        receiptImage: UIImage
-    ) async {
-        do {
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
-            var params: [String: String] = [
-                "title": title,
-                "price": String(price),
-                "date_made": formatter.string(from: date_made),
-                "type": type.rawValue
-            ]
-            
-            if let category_id = category_id {
-                params["category_id"] = String(category_id)
-            }
-            
-            let _: Transaction = try await APIClient.shared.uploadMultipart(
-                endpoint: "api/transaction/receipt",
-                image: receiptImage,
-                imageFieldName: "image", // make sure this matches backend!
-                parameters: params
-            )
-            
-            await fetchTransactionsNoTime()
-        } catch {
-            print("Transaction with receipt could not be added:", error)
-        }
-    }
-
+    func draftTransactionFromReceipt(image: UIImage) async -> Transaction? {
+           do {
+               let transaction: Transaction = try await APIClient.shared.uploadMultipart(
+                   endpoint: "api/transaction/receipt",
+                   image: image,
+                   imageFieldName: "image",
+                   parameters: [:]
+               )
+               return transaction
+           } catch {
+               print("Receipt upload failed:", error)
+               return nil
+           }
+       }
     
     
     

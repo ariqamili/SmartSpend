@@ -34,7 +34,9 @@ class AuthenticationViewModel: ObservableObject {
                 return
             }
             if let user = result?.user {
-                self?.setSignedIn(user: user, userVM: userVM)
+                Task { @MainActor [weak self] in
+                    self?.setSignedIn(user: user, userVM: userVM)
+                }
             }
         }
     }
