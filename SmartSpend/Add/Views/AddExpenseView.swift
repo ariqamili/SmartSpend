@@ -24,7 +24,7 @@ struct AddExpenseView: View {
                 Form{
                     TextField("Title", text: $viewModel.expenseTitle)
                         .listRowBackground(
-                            RoundedRectangle(cornerRadius: 10)
+                            RoundedRectangle(cornerRadius: 25)
                                 .stroke(Color.gray, lineWidth: 2)
                         )
                     
@@ -38,7 +38,7 @@ struct AddExpenseView: View {
                     }
                     .foregroundStyle(Color.MainColor)
                     .listRowBackground(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 25)
                             .stroke(Color.gray, lineWidth: 2)
                     )
                     
@@ -52,7 +52,7 @@ struct AddExpenseView: View {
                             }
                         }
                         .listRowBackground(
-                            RoundedRectangle(cornerRadius: 10)
+                            RoundedRectangle(cornerRadius: 25)
                                 .stroke(Color.gray, lineWidth: 2)
                         )
                     
@@ -60,7 +60,7 @@ struct AddExpenseView: View {
                     DatePicker("Date", selection: $viewModel.expenseDate, displayedComponents: .date)
                         .foregroundStyle(Color.MainColor)
                         .listRowBackground(
-                            RoundedRectangle(cornerRadius: 10)
+                            RoundedRectangle(cornerRadius: 25)
                                 .stroke(Color.gray, lineWidth: 2)
                         )
                     
@@ -71,6 +71,7 @@ struct AddExpenseView: View {
                             let success = await viewModel.AddExpense()
                             if success {
                                 alertMessage = "Expense added successfully!"
+                                await userVM.fetchUser()
                             } else {
                                 alertMessage = "Failed to add expense. Try again."
                             }

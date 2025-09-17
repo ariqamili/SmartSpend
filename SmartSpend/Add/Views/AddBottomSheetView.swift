@@ -64,7 +64,6 @@ struct AddBottomSheetView: View {
                                     .foregroundColor(.gray)
                             )
                         }
-                        .padding()
                         .sheet(isPresented: $showCamera) {
                             ImagePicker(sourceType: .camera) { image in
                                 capturedImage = image

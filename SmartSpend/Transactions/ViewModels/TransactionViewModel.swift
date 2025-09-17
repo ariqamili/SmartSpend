@@ -32,7 +32,7 @@ class TransactionViewModel: ObservableObject{
     }
     
     init() {
-//        loadFakeData()
+        loadFakeData()
     }
     
     func loadFakeData(){
@@ -140,7 +140,7 @@ class TransactionViewModel: ObservableObject{
     
     
     
-    func addTransaction(title: String, price: Double, date_made: Date, type: Transaction.TransactionType, category_id: Int64? = nil) async {
+    func addTransaction(title: String, price: Double, date_made: Date, type: Transaction.TransactionType, category_id: Int64? = nil) async -> Bool {
         let newTransaction = Transaction(
             id: nil,
             title: title,
@@ -158,8 +158,10 @@ class TransactionViewModel: ObservableObject{
             )
             
             await fetchTransactionsNoTime()
+            return true
         } catch {
             print("Transaction could not be added:", error)
+            return false
         }
     }
     

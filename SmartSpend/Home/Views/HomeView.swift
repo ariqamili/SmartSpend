@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @EnvironmentObject var userVM: UserViewModel
+    @State var showEditSheet: Bool = false
     
 
     var body: some View {
@@ -19,10 +20,23 @@ struct HomeView: View {
         SmartSpendNavigationView(){
             ScrollView{
                 VStack{
-                    Text("Your Balance")
-                        .font(.caption)
-                        .frame(maxWidth: 370, alignment: .leading)
-                        .foregroundStyle(.gray)
+                    HStack{
+                        Text("Your Balance")
+                            .font(.caption)
+                            .frame(maxWidth: 370, alignment: .leading)
+                            .foregroundStyle(.gray)
+                        
+                        Button(action:{
+                            showEditSheet = true
+                        }, label:{
+                            Text("Edit Balance")
+                        })
+                        .foregroundColor(.MainColor)
+                        .font(.footnote)
+                        .padding(.trailing)
+                    }
+                    .padding()
+                    
                     HStack{
                         
                         if viewModel.show {
@@ -74,6 +88,12 @@ struct HomeView: View {
                     
                 }
             }
+            .sheet(isPresented: $showEditSheet) {
+                EditBalanceView()
+                    .presentationDetents([.fraction(0.3)])
+
+            }
+
         }
         
         
