@@ -4,14 +4,19 @@
 <dict>
     <key>GIDClientID</key>
     <string>861988830364-inbg002hh7li1cpcei4tvaoimq1n4hq5.apps.googleusercontent.com</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.861988830364-inbg002hh7li1cpcei4tvaoimq1n4hq5</string>
-			</array>
-		</dict>
-	</array>
+
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.861988830364-inbg002hh7li1cpcei4tvaoimq1n4hq5</string>
+            </array>
+        </dict>
+    </array>
+
+    <!-- 👇 Add this new key -->
+    <key>NSCameraUsageDescription</key>
+    <string>SmartSpend needs access to your camera to let you take pictures of your receipts.</string>
 </dict>
 </plist>

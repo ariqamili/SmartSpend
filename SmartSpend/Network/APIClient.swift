@@ -1,11 +1,15 @@
 import Foundation
+import UIKit
+
+enum UploadError: Error {
+    case encodingFailed
+}
 
 class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    private let baseURL = URL(string: "https://0c361505db82.ngrok-free.app/")!
-    
+    private let baseURL = URL(string: "https://5775d2a1e0d9.ngrok-free.app/")!
     
     
     private let isoFormatter: DateFormatter = {
@@ -28,6 +32,75 @@ class APIClient {
         dec.dateDecodingStrategy = .formatted(isoFormatter)
         return dec
     }()
+    
+    
+    // Sending Photos
+    func uploadMultipart<T: Decodable>(
+          endpoint: String,
+          image: UIImage,
+          imageFieldName: String = "image",  // adjust to match backend
+          parameters: [String: String] = [:]
+      ) async throws -> T {
+          
+          guard let url = URL(string: endpoint, relativeTo: baseURL) else {
+              throw URLError(.badURL)
+          }
+          
+          var urlRequest = URLRequest(url: url)
+          urlRequest.httpMethod = "POST"
+          
+          let boundary = UUID().uuidString
+          urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+          
+          if let token = await TokenManager.shared.accessToken {
+              urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+          }
+          
+          var body = Data()
+          
+          // Add extra fields
+          for (key, value) in parameters {
+              body.append("--\(boundary)\r\n".data(using: .utf8)!)
+              body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+              body.append("\(value)\r\n".data(using: .utf8)!)
+          }
+          
+          // Ensure safe resolution & size
+          let safeImage = image.resizedToSafeSize(maxDimension: 1024)
+          guard let imageData = safeImage.jpegData(compressionQuality: 0.9) else {
+              throw UploadError.encodingFailed
+          }
+
+
+
+          body.append("--\(boundary)\r\n".data(using: .utf8)!)
+          body.append("Content-Disposition: form-data; name=\"\(imageFieldName)\"; filename=\"receipt.jpg\"\r\n".data(using: .utf8)!)
+          body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+          body.append(imageData)
+          body.append("\r\n".data(using: .utf8)!)
+          
+          body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+          urlRequest.httpBody = body
+          
+          let (data, response) = try await URLSession.shared.data(for: urlRequest)
+          
+          print("Upload raw response:", String(data: data, encoding: .utf8) ?? "nil")
+          
+          guard let httpResponse = response as? HTTPURLResponse else {
+              throw URLError(.badServerResponse)
+          }
+          
+          if httpResponse.statusCode == 401 {
+              try await TokenManager.shared.refreshAccessToken()
+              return try await uploadMultipart(endpoint: endpoint, image: image, imageFieldName: imageFieldName, parameters: parameters)
+          }
+          
+          guard (200...299).contains(httpResponse.statusCode) else {
+              throw NSError(domain: "", code: httpResponse.statusCode, userInfo: nil)
+          }
+          
+          return try decoder.decode(T.self, from: data)
+      }
 
 
     // Generic request that retries once on 401

@@ -31,8 +31,12 @@ struct TransactionPartialView: View {
                         Image(systemName: "arrow.down.backward").foregroundStyle(.green)
                             
                         
-                        Text("\(transaction.title)")
+                        let words = transaction.title.split(separator: " ")
+                        let displayTitle = words.count > 1 ? "\(words.first!)..." : transaction.title
+
+                        Text(displayTitle)
                             .frame(maxWidth: .infinity, alignment: .leading)
+
                         
                         Text("+ \(String(format: "%.2f", transaction.price))")
                             .foregroundStyle(.green)
@@ -46,8 +50,13 @@ struct TransactionPartialView: View {
                         Image(systemName: "arrow.up.forward").foregroundStyle(.red)
                             
                         
-                        Text("\(transaction.title)")
+                        let words = transaction.title.split(separator: " ")
+                        let displayTitle = words.count > 1 ? "\(words.first!)..." : transaction.title
+
+                        Text(displayTitle)
                             .frame(maxWidth: .infinity, alignment: .leading)
+
+
                         
                         Text("- \(String(format: "%.2f", transaction.price))")
                             .foregroundStyle(.red)
@@ -66,6 +75,8 @@ struct TransactionPartialView: View {
             .contentMargins(.vertical, 0)
             .scrollContentBackground(.hidden)
             .listRowSpacing(10)
+            .frame(height: 220)
+            .scrollDisabled(true)
             
         }
         .task {

@@ -30,7 +30,7 @@ struct AddIncomeView: View {
  
                 
                 
-                TextField("Price:  \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)", text: $viewModel.incomePrice)
+                TextField("Price:  \(userVM.currentUser?.preferred_currency ?? User.Currency.MKD)" as String, text: $viewModel.incomePrice)
                     .keyboardType(.decimalPad)
                     .onChange(of: viewModel.incomePrice) { oldValue, newValue in
                         let filtered = newValue.filter { "0123456789.".contains($0) }
@@ -68,7 +68,7 @@ struct AddIncomeView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(10)
                 .foregroundStyle(.white)
                 .listRowBackground(Color.MainColor)
                 .alert("Result", isPresented: $showAlert) {

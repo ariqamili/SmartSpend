@@ -104,7 +104,7 @@ struct EditAccountView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding()
+            .padding(10)
             .foregroundStyle(.white)
             .listRowBackground(Color.MainColor)
             .alert("Result", isPresented: $showAlert) {

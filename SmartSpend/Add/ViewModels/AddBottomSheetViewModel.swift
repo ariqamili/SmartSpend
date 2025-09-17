@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import SwiftUICore
+import SwiftUI
+import UIKit
 
 
 
@@ -43,7 +44,23 @@ class AddBottomSheetViewModel: ObservableObject {
         Double(incomePrice) ?? 0.0
     }
     @Published var incomeDate: Date = Date()
+    
+    @Published var isAnalyzingReceipt: Bool = false
         
+    
+    
+    func analyzeReceipt(receiptImage: UIImage) async {
+        isAnalyzingReceipt = true
+        defer { isAnalyzingReceipt = false }  // always turn off when done
+        
+        if let draft = await transactionVM.draftTransactionFromReceipt(image: receiptImage) {
+            expenseTitle = draft.title
+            expensePrice = String(draft.price)
+            expenseDate = draft.date_made
+            expenseCategory = draft.category_id ?? expenseCategory
+        }
+    }
+    
     
     
     func AddExpense() async -> Bool{

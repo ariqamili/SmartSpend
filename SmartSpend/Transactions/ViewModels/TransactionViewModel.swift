@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 @MainActor
 class TransactionViewModel: ObservableObject{
@@ -74,7 +75,7 @@ class TransactionViewModel: ObservableObject{
            ),
            Transaction(
                id: 5,
-               title: "Freelance Project",
+               title: "Freelance Project Freelance Project",
                price: 600,
                date_made: Date().addingTimeInterval(-86400 * 3), // 3 days ago
                category_id: 5,
@@ -161,6 +162,24 @@ class TransactionViewModel: ObservableObject{
             print("Transaction could not be added:", error)
         }
     }
+    
+
+    func draftTransactionFromReceipt(image: UIImage) async -> Transaction? {
+           do {
+               let transaction: Transaction = try await APIClient.shared.uploadMultipart(
+                   endpoint: "api/transaction/receipt",
+                   image: image,
+                   imageFieldName: "image",
+                   parameters: [:]
+               )
+               return transaction
+           } catch {
+               print("Receipt upload failed:", error)
+               return nil
+           }
+       }
+    
+    
     
     func editTransaction(
         id: Int64,

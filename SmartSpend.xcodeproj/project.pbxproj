@@ -35,6 +35,11 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		7AA9945E2E781CAA00E9CAEB /* Savings */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Savings;
+			sourceTree = "<group>";
+		};
 		7AB499172E604F5500DBD5A6 /* User */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = User;
@@ -102,6 +107,7 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
+				7AA9945E2E781CAA00E9CAEB /* Savings */,
 				7AB499172E604F5500DBD5A6 /* User */,
 				7AF92FF12E5FB09600004279 /* Categories */,
 				7AEF4B152E5DAD220050CB92 /* Transactions */,
@@ -144,6 +150,7 @@
 			fileSystemSynchronizedGroups = (
 				7A38C61E2E55BE290030D210 /* Network */,
 				7A38C6272E55ECA20030D210 /* Shared */,
+				7AA9945E2E781CAA00E9CAEB /* Savings */,
 				7AB499172E604F5500DBD5A6 /* User */,
 				7AC367D02E57595F00424841 /* Auth */,
 				7AC367FF2E5C9B9600424841 /* Home */,

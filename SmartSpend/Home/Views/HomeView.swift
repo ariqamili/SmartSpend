@@ -14,59 +14,65 @@ struct HomeView: View {
 
     var body: some View {
         
+        
+        
         SmartSpendNavigationView(){
-            VStack{
-                Text("Your Balance")
-                    .font(.caption)
-                    .frame(maxWidth: 370, alignment: .leading)
-                    .foregroundStyle(.gray)                
-                HStack{
-                    
-                    if viewModel.show {
-                        Text(
-                            userVM.currentUser?.balance.formatted(
-                                .currency(code: userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
-                            ) ?? "****"
-                        )
-                        .font(.system(size: 35))
+            ScrollView{
+                VStack{
+                    Text("Your Balance")
+                        .font(.caption)
                         .frame(maxWidth: 370, alignment: .leading)
-                        .foregroundStyle(Color.MainColor)
-
-                    } else {
-                        Text("**** \(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)")
+                        .foregroundStyle(.gray)
+                    HStack{
+                        
+                        if viewModel.show {
+                            Text(
+                                userVM.currentUser?.balance.formatted(
+                                    .currency(code: userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)
+                                ) ?? "****"
+                            )
                             .font(.system(size: 35))
                             .frame(maxWidth: 370, alignment: .leading)
                             .foregroundStyle(Color.MainColor)
-                    }
-
-
-
-                    
-                    
-                    Button {
-                        viewModel.toggleVisibility()
-                    } label: {
-                        if viewModel.show{
-                            Image(systemName:"eye.slash")
-                                .foregroundStyle(.gray)
-                        } else{
-                            Image(systemName:"eye")
-                                .foregroundStyle(.gray)
+                            
+                        } else {
+                            Text("**** \(userVM.currentUser?.preferred_currency.rawValue ?? User.Currency.MKD.rawValue)")
+                                .font(.system(size: 35))
+                                .frame(maxWidth: 370, alignment: .leading)
+                                .foregroundStyle(Color.MainColor)
                         }
-                    
+                        
+                        
+                        
+                        
+                        
+                        Button {
+                            viewModel.toggleVisibility()
+                        } label: {
+                            if viewModel.show{
+                                Image(systemName:"eye.slash")
+                                    .foregroundStyle(.gray)
+                            } else{
+                                Image(systemName:"eye")
+                                    .foregroundStyle(.gray)
+                            }
+                            
+                            
+                        }
                         
                     }
-
+                    .padding(.horizontal)
+                    
+                    
+                    TransactionPartialView()
+                    
+                    SavingsPartialView()
+                    
+                    
+                    
+                    Spacer()
+                    
                 }
-                .padding(.horizontal)
-        
-        
-               TransactionPartialView()
-    
-                
-                
-                Spacer()
-                
             }
         }
         
