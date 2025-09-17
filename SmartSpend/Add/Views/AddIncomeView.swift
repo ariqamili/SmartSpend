@@ -24,7 +24,7 @@ struct AddIncomeView: View {
                 TextField("Title", text: $viewModel.incomeTitle)
                     .padding(8)
                     .listRowBackground(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 25)
                             .stroke(Color.gray, lineWidth: 2)
                     )
  
@@ -40,7 +40,7 @@ struct AddIncomeView: View {
                     }
                     .padding(8)
                     .listRowBackground(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 25)
                             .stroke(Color.gray, lineWidth: 2)
                     )
 
@@ -49,18 +49,17 @@ struct AddIncomeView: View {
                     .foregroundStyle(Color.MainColor)
                     .padding(4)
                     .listRowBackground(
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 25)
                             .stroke(Color.gray, lineWidth: 2)
                     )
 
-                Spacer()
-                Spacer()
                 
                 Button("Submit") {
                     Task {
                         let success = await viewModel.AddIncome()
                         if success {
                             alertMessage = "Income added successfully!"
+                            await userVM.fetchUser()
                         } else {
                             alertMessage = "Failed to add income. Try again."
                         }

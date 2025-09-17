@@ -22,7 +22,6 @@ struct SmartSpendNavigationView<Content: View>: View {
                                   Image("SmartSpendLogo")
                                       .resizable()
                                       .frame(width: 50, height: 40)
-
                           }
                           
                           ToolbarItem(placement: .principal){
@@ -50,3 +49,5 @@ struct SmartSpendNavigationView<Content: View>: View {
               }
     }
 }
+
+
