@@ -22,6 +22,8 @@ import Foundation
 @MainActor
 class UserViewModel: ObservableObject {
     @Published var currentUser: User?
+    @Published var isOnboarded = false
+//    @Published var errorMessage = false
 
     func fetchUser() async {
         do {
@@ -40,17 +42,26 @@ class UserViewModel: ObservableObject {
         }
         
         do {
-            let response: UpdateUserResponse = try await APIClient.shared.request(
+            let response: UserResponse = try await APIClient.shared.request(
                 endpoint: "api/user/update",
-                method: "POST",
+                method: "PATCH",
                 body: request
             )
-            print(response.message)
+//            print(response.message)
 
-//            await fetchUser()
+            await fetchUser()
+            
+            currentUser = response.data
+            print("User updated successfully:", response.data)
 
         } catch {
             print("Failed to update user:", error)
+        }
+    }
+    
+    func completeOnboarding() {
+        DispatchQueue.main.async {
+            self.isOnboarded = true
         }
     }
 }

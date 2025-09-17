@@ -75,7 +75,7 @@ struct StartingScreenView: View {
                 
             } else {
                 AnyView(switchingView)
-//                    .transition(.opacity)
+                    .transition(.opacity)
             }
         }
     }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7A657E4D2E52760A00B099F1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4C2E52760A00B099F1 /* GoogleSignIn */; };
 		7A657E4F2E52760A00B099F1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4E2E52760A00B099F1 /* GoogleSignInSwift */; };
-		EE2B13D22E703C890089C289 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2B13D12E703C890089C289 /* test.swift */; };
 		EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */; };
 		EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */; };
 		EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 
 /* Begin PBXFileReference section */
 		7A657E4A2E52746100B099F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		EE2B13D12E703C890089C289 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSpend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSpendApp.swift; sourceTree = "<group>"; };
 		EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */,
 				EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */,
 				EEB321E32E4CCA7400BD4E77 /* Preview Content */,
-				EE2B13D12E703C890089C289 /* test.swift */,
 			);
 			path = SmartSpend;
 			sourceTree = "<group>";
@@ -236,7 +233,6 @@
 			isa = PBXSourcesBuildPhase;
 			files = (
 				EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */,
-				EE2B13D22E703C890089C289 /* test.swift in Sources */,
 				EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */,
 			);
 		};

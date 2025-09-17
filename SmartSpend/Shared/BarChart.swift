@@ -81,62 +81,9 @@ struct BarChart: View {
                         .fill(.ultraThinMaterial)
                         .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                 )
-                .padding(.horizontal)
+                .padding()
                 
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Category Breakdown")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal)
-                    
-                    LazyVStack(spacing: 8) {
-                        ForEach(categoryData.sorted(by: { $0.amount > $1.amount })) { item in
-                            HStack(spacing: 16) {
-                                // Category Icon
-                                ZStack {
-                                    Circle()
-                                        .fill(item.color.opacity(0.2))
-                                        .frame(width: 40, height: 40)
-                                    
-                                    Image(systemName: item.icon)
-                                        .foregroundStyle(item.color)
-                                        .font(.system(size: 16, weight: .medium))
-                                }
-                                
-                                // Category Info
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(item.category)
-                                        .font(.subheadline)
-                                        .fontWeight(.medium)
-                                    
-                                    Text("Category spending")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                
-                                Spacer()
-                                
-                                // Amount
-                                VStack(alignment: .trailing, spacing: 2) {
-                                    Text("\(Int(item.amount)) MKD")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                    
-                                    Text("\(Int((item.amount / categoryData.map(\.amount).reduce(0, +)) * 100))%")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(.ultraThinMaterial)
-                            )
-                        }
-                    }
-                    .padding(.horizontal)
-                }
+                CategoryBreakdown()
             }
         }
     }
