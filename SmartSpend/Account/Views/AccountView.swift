@@ -39,7 +39,7 @@ struct AccountView: View {
     
     var body: some View {
         
-        NavigationStack {
+        SmartSpendNavigationView(){
             
             VStack{
                 
@@ -207,11 +207,6 @@ struct AccountView: View {
                 
                 
                 
-            }
-            .toolbar() {
-                ToolbarItem(placement: .principal) {
-                    Text("Profile")
-                }
             }
             .task {
                    if let currency = userVM.currentUser?.preferred_currency {
