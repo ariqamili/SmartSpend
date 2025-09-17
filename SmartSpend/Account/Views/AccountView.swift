@@ -12,11 +12,6 @@ struct AccountView: View {
     @EnvironmentObject var authVM: AuthenticationViewModel
     @EnvironmentObject var userVM: UserViewModel
     @State private var selectedCurrency: User.Currency = .MKD
-    @State private var wiS: Bool = false
-    @State private var imdS: Bool = false
-    @State private var wpaS: Bool = false
-    @State private var hoarU: Bool = false
-    @State private var dscF: Bool = false
     @Environment(\.openURL) private var openUrl
     
     func sendEmail(openUrl: OpenURLAction, to email: String = "refikjaija3@gmail.com", subject: String = "Feedback", body: String = "Dear SmarSpend team,") {
@@ -39,7 +34,7 @@ struct AccountView: View {
     
     var body: some View {
         
-        NavigationStack {
+        SmartSpendNavigationView(){
             
             VStack{
                 
@@ -201,17 +196,7 @@ struct AccountView: View {
                     .shadow(radius: 2)
                 }
                 .padding()
-                
-                
-                
-                
-                
-                
-            }
-            .toolbar() {
-                ToolbarItem(placement: .principal) {
-                    Text("Profile")
-                }
+            
             }
             .task {
                    if let currency = userVM.currentUser?.preferred_currency {
