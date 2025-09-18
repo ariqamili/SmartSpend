@@ -1,32 +1,9 @@
-////
-////  UIImage.swift
-////  SmartSpend
-////
-////  Created by Refik Jaija on 16.9.25.
-////
 //
-//import Foundation
-//import UIKit
+//  UIImage.swift
+//  SmartSpend
 //
-//extension UIImage {
-//    func resizedToSafeSize(maxDimension: CGFloat = 1024) -> UIImage {
-//        let aspectRatio = size.width / size.height
-//        var newSize: CGSize
-//        if aspectRatio > 1 {
-//            // Landscape
-//            newSize = CGSize(width: maxDimension, height: maxDimension / aspectRatio)
-//        } else {
-//            // Portrait
-//            newSize = CGSize(width: maxDimension * aspectRatio, height: maxDimension)
-//        }
-//        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-//        draw(in: CGRect(origin: .zero, size: newSize))
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return newImage ?? self
-//    }
-//}
-
+//  Created by Refik Jaija on 16.9.25.
+//
 
 import UIKit
 import UniformTypeIdentifiers

@@ -151,7 +151,7 @@ struct AccountView: View {
                 Text("FAQ")
                     .frame(maxWidth:360, alignment: .leading)
                     .padding(.top)
-                    .font(.headline)
+                    .font(.title2)
                     .foregroundStyle(Color.MainColor)
                 
                 ScrollView{

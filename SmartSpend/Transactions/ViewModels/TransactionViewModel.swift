@@ -23,12 +23,20 @@ class TransactionViewModel: ObservableObject{
     
     @Published var endDate: Date = Date()
     
-    var expenses: Int {
-        transactions.count(where: { $0.type == .expense })
+    var expenses: Double {
+        transactions
+            .filter { $0.type == .expense }
+            .reduce(0) { $0 + $1.price }
     }
     
-    var income: Int {
-        transactions.count(where: { $0.type == .income })
+    var income: Double {
+        transactions
+            .filter { $0.type == .income }
+            .reduce(0) { $0 + $1.price }
+    }
+    
+    var netBalance: Double {
+        income - expenses
     }
     
     init() {
@@ -228,3 +236,4 @@ class TransactionViewModel: ObservableObject{
     
     
 }
+

@@ -8,6 +8,7 @@ import Charts
 
 struct SavingFullView: View {
     @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var transactionVM: TransactionViewModel
     
     let saveMonths: [SaveMonth] = [
         .init(date: Date.from(month: 1), savedForMonth: 1200),
@@ -31,11 +32,11 @@ struct SavingFullView: View {
                 .padding(.vertical)
             
             HStack {
-                createSavingsPreview(type: "Total Income", value: 1000, image: "arrow.up.forward.app", color: .green)
+                createSavingsPreview(type: "Total Income", value: transactionVM.income, image: "arrow.up.forward.app", color: .green)
   
                 Spacer()
                 
-                createSavingsPreview(type: "Total Expense", value: 2000, image: "arrow.down.forward.square", color: .red)
+                createSavingsPreview(type: "Total Expense", value: transactionVM.expenses, image: "arrow.down.forward.square", color: .red)
             }
             .padding()
             
@@ -68,7 +69,7 @@ struct SavingFullView: View {
     }
     
     @ViewBuilder
-    func createSavingsPreview(type: String, value: Int, image: String, color: Color) -> some View {
+    func createSavingsPreview(type: String, value: Double, image: String, color: Color) -> some View {
         VStack{
             HStack{
                 Image(systemName: image)
@@ -76,7 +77,7 @@ struct SavingFullView: View {
                     .frame(width: 17, height: 17)
                 Text(type)
             }
-            Text("\(value) \(userVM.currentUser?.preferred_currency.rawValue ?? "MKD")")
+            Text("\(value, specifier: "%.2f") \(userVM.currentUser?.preferred_currency.rawValue ?? "MKD")")
                 .foregroundStyle(color)
                 .fontWeight(.bold)
         }
@@ -91,6 +92,7 @@ struct SavingFullView: View {
     NavigationStack {
         SavingFullView()
             .environmentObject(UserViewModel())
+            .environmentObject(TransactionViewModel())
     }
 }
 
