@@ -38,7 +38,7 @@ class APIClient {
     func uploadMultipart<T: Decodable>(
           endpoint: String,
           image: UIImage,
-          imageFieldName: String = "image",  // adjust to match backend
+          imageFieldName: String = "image",
           parameters: [String: String] = [:]
       ) async throws -> T {
           

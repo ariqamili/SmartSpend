@@ -7,14 +7,15 @@ import SwiftUI
 
 struct SavingsPartialView: View {
     
-    @State var saved: CGFloat = 200
     var text: String = "View More"
     @State var isOnHomeScreen: Bool = true
     @State var showEditSheet: Bool = false
     @EnvironmentObject var userVM: UserViewModel
+    @EnvironmentObject var transactionVM: TransactionViewModel
     
     var body: some View {
         @State var goal = userVM.currentUser?.monthly_saving_goal ?? 2000
+        @State var saved = transactionVM.netBalance
         
         VStack{
             VStack(alignment: .leading, spacing: 7) {
@@ -92,5 +93,6 @@ struct SavingsPartialView: View {
     NavigationStack{
         SavingsPartialView()
             .environmentObject(UserViewModel())
+            .environmentObject(TransactionViewModel())
     }
 }
