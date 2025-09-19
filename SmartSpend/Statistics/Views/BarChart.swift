@@ -21,7 +21,6 @@ struct BarChart: View {
    ]
     
     var body: some View {
-        ScrollView{
             VStack{
                 Chart(categoryData) { item in
                     BarMark(
@@ -82,10 +81,8 @@ struct BarChart: View {
                         .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                 )
                 .padding()
-                
-                CategoryBreakdown()
             }
-        }
+        
     }
 }
 
