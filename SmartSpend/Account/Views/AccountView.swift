@@ -196,7 +196,7 @@ struct AccountView: View {
                             .foregroundStyle(.white)
                     }
                     .frame(maxWidth: .infinity, minHeight: 60)
-                    .background(Color.LogOutColor)
+                    .background(Color.red)
                     .cornerRadius(12)
                     .shadow(radius: 2)
                 }

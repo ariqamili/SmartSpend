@@ -20,7 +20,7 @@ struct TransactionPartialView: View {
             }
             .frame(maxWidth: 340, alignment: .trailing)
             .foregroundStyle(Color.MainColor)
-            .padding(.top)
+//            .padding(.top)
             .font(.footnote)
             
 
@@ -71,12 +71,13 @@ struct TransactionPartialView: View {
                     
                 }
                 .listRowBackground(Color.MainColor.opacity(0.15))
-                .padding(7.5)
+//                .padding(3.5)
+                .frame(maxWidth: .infinity)
             }
             .contentMargins(.vertical, 0)
             .scrollContentBackground(.hidden)
             .listRowSpacing(10)
-            .frame(height: 230)
+            .frame(height: 155)
             .scrollDisabled(true)
             
         }

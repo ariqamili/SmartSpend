@@ -22,7 +22,14 @@ import Foundation
 @MainActor
 class UserViewModel: ObservableObject {
     @Published var currentUser: User?
+    @Published var isOnboarded = false
 
+    private let onboardingKey = "hasCompletedOnboarding"
+    
+    init() {
+            loadOnboardingStatus()
+        }
+   
     func fetchUser() async {
         do {
             let response: UserResponse = try await APIClient.shared.request(endpoint: "api/user/me")
@@ -40,17 +47,44 @@ class UserViewModel: ObservableObject {
         }
         
         do {
-            let response: UpdateUserResponse = try await APIClient.shared.request(
+            let response: UserResponse = try await APIClient.shared.request(
                 endpoint: "api/user/update",
                 method: "PATCH",
                 body: request
             )
-            print(response.message)
+//            print(response.message)
 
-//            await fetchUser()
+            await fetchUser()
+            
+            currentUser = response.data
+            print("User updated successfully:", response.data)
 
         } catch {
             print("Failed to update user:", error)
         }
     }
+    
+    func completeOnboarding() {
+//        DispatchQueue.main.async {
+//            self.isOnboarded = true
+//        }
+        
+        isOnboarded = true
+                // Persist this state so user doesn't see onboarding again
+                UserDefaults.standard.set(true, forKey: onboardingKey)
+                print("Onboarding completed and saved to UserDefaults")
+    }
+    
+    private func loadOnboardingStatus() {
+            isOnboarded = UserDefaults.standard.bool(forKey: onboardingKey)
+            print("Loaded onboarding status: \(isOnboarded)")
+        }
+    
+    func resetOnboardingStatus() {
+            // For testing purposes or if user wants to redo onboarding
+            isOnboarded = false
+            UserDefaults.standard.removeObject(forKey: onboardingKey)
+            print("Onboarding status reset")
+        }
+    
 }
