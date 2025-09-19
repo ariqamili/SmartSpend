@@ -72,6 +72,7 @@ struct AddExpenseView: View {
                             if success {
                                 alertMessage = "Expense added successfully!"
                                 await transactionVM.fetchTransactions()
+                                await userVM.fetchUser()
                             } else {
                                 alertMessage = "Failed to add expense. Try again."
                             }
