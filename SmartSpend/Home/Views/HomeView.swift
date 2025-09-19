@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 //
 //  HomeView.swift
 //  SmartSpend
 //
 //  Created by Refik Jaija on 17.8.25.
 //
+=======
+////
+////  HomeView.swift
+////  SmartSpend
+////
+////  Created by Refik Jaija on 17.8.25.
+////
+>>>>>>> 03f5016b72bb52e06a0a244c1a4d6964325a7ce1
 
 import SwiftUI
 

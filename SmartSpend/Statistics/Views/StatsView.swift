@@ -13,23 +13,27 @@ struct StatsView: View {
     
     var body: some View {
         VStack{
-            Picker("Period type", selection: $selectedView) {
-                Text("Weekly").tag(1)
-                Text("Monthly").tag(2)
+            ScrollView{
+                Picker("Period type", selection: $selectedView) {
+                    Text("Weekly").tag(1)
+                    Text("Monthly").tag(2)
+                }
+                .pickerStyle(.segmented)
+                .padding()
+                
+                Spacer()
+                
+                if(selectedView == 1){
+                    PieChart(isOnHomeView: false)
+                }
+                else{
+                    BarChart()
+                }
+                
+                CategoryBreakdown()
+                
+                Spacer()
             }
-            .pickerStyle(.segmented)
-            .padding()
-            
-            Spacer()
-            
-            if(selectedView == 1){
-                PieChart(isOnHomeView: false)
-            }
-            else{
-                BarChart()
-            }
-            
-            Spacer()
         }
     }
 
