@@ -146,6 +146,10 @@ class TransactionViewModel: ObservableObject{
     }
     
     
+    struct MessageResponse: Codable {
+        let message: String
+    }
+
     
     
     func addTransaction(title: String, price: Double, date_made: Date, type: Transaction.TransactionType, category_id: Int64? = nil) async -> Bool {
@@ -159,13 +163,12 @@ class TransactionViewModel: ObservableObject{
         )
         
         do {
-            let _: Transaction = try await APIClient.shared.request(
+            let response: MessageResponse = try await APIClient.shared.request(
                 endpoint: "api/transaction",
                 method: "POST",
                 body: newTransaction
             )
-            
-            await fetchTransactionsNoTime()
+            print("Added transaction:", response.message)
             return true
         } catch {
             print("Transaction could not be added:", error)

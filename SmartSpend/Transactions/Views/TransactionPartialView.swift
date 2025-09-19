@@ -16,6 +16,7 @@ struct TransactionPartialView: View {
         NavigationStack{
             NavigationLink("View More"){
                 TransactionsFullView()
+                    .environmentObject(transactionVM)
             }
             .frame(maxWidth: 340, alignment: .trailing)
             .foregroundStyle(Color.MainColor)

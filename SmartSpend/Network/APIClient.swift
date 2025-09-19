@@ -9,7 +9,7 @@ class APIClient {
     static let shared = APIClient()
     private init() {}
 
-    private let baseURL = URL(string: "https://5775d2a1e0d9.ngrok-free.app/")!
+    private let baseURL = URL(string: "https://9cf0c623356c.ngrok-free.app/")!
     
     
     private let isoFormatter: DateFormatter = {
