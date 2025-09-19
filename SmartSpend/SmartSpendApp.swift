@@ -22,18 +22,21 @@ struct SmartSpendApp: App {
                     ProgressView("Restoring session...") 
                 } else if authVM.isSignedIn && userVM.isOnboarded {
                     StartingScreenView(switchingView: ContentView())
-                } else {
-                    StartingScreenView(switchingView: LoginView())
-                }
-                
-                if authVM.isSignedIn && userVM.isOnboarded {
-                    StartingScreenView(switchingView: ContentView())
                 } else if !authVM.isSignedIn{
                     StartingScreenView(switchingView: LoginView())
                 }
                 else{
                     OnboardView()
                 }
+                
+//                if authVM.isSignedIn && userVM.isOnboarded {
+//                    StartingScreenView(switchingView: ContentView())
+//                } else if !authVM.isSignedIn{
+//                    StartingScreenView(switchingView: LoginView())
+//                }
+//                else{
+//                    OnboardView()
+//                }
             }
             .environmentObject(userVM)
             .environmentObject(categoryVM)
