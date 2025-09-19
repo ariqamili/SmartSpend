@@ -61,15 +61,17 @@ struct PieChart: View {
             .chartLegend(.hidden)
             .frame(height: 320)
             .padding()
-        }
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.MainColor.opacity(0.2))
-//                .stroke(Color.MainColor, lineWidth: 1)
-                .padding(.horizontal)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.MainColor.opacity(0.2))
+                //                .stroke(Color.MainColor, lineWidth: 1)
+                    .padding(.horizontal)
+                
+            )
+            .frame(maxWidth: .infinity)
             
-        )
-        .frame(maxWidth: .infinity)
+            CategoryBreakdown()
+        }
     }
 }
 

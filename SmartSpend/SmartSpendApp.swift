@@ -25,15 +25,6 @@ struct SmartSpendApp: App {
                 } else {
                     StartingScreenView(switchingView: LoginView())
                 }
-                
-                if authVM.isSignedIn && userVM.isOnboarded {
-                    StartingScreenView(switchingView: ContentView())
-                } else if !authVM.isSignedIn{
-                    StartingScreenView(switchingView: LoginView())
-                }
-                else{
-                    OnboardView()
-                }
             }
             .environmentObject(userVM)
             .environmentObject(categoryVM)
@@ -46,30 +37,5 @@ struct SmartSpendApp: App {
                 await authVM.restoreSession(userVM: userVM)
             }
         }
-        
-        //        Group {
-        //            if authVM.isSignedIn && userVM.isOnboarded {
-        //                StartingScreenView(switchingView: mainTabView)
-        //            } else if !authVM.isSignedIn{
-        //                StartingScreenView(switchingView: LoginView())
-        //            }
-        //            else{
-        //                OnboardView()
-        //            }
-        //
-        //        }
-        //        .onChange(of: authVM.isSignedIn) { oldValue, newValue in
-        //            if newValue {
-        //                Task {
-        //                    await userVM.fetchUser()
-        //                    print("The current user: \(String(describing: userVM.currentUser))")
-        //                   // await categoryVM.fetchCategories()
-        //                }
-        //            } else {
-        //                // Clear cached user on sign out
-        //                userVM.currentUser = nil
-        //            }
-        //
-        //        }
     }
 }
