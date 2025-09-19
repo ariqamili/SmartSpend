@@ -47,6 +47,7 @@ struct SmartSpendNavigationView<Content: View>: View {
                           }
                       }
               }
+       
     }
 }
 

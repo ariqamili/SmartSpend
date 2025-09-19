@@ -22,6 +22,8 @@
 		EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EEC9C70E2E65EC3100F86412 /* SmartSpendRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSpendRelease.entitlements; sourceTree = "<group>"; };
+		EEE1427A2E65F5BB0045CA28 /* SmartSpendDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSpendDebug.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,11 +35,6 @@
 		7A38C6272E55ECA20030D210 /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		7AA9945E2E781CAA00E9CAEB /* Savings */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Savings;
 			sourceTree = "<group>";
 		};
 		7AB499172E604F5500DBD5A6 /* User */ = {
@@ -75,6 +72,21 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		EE2B13CC2E6FA2B20089C289 /* Statistics */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		EEC9C69B2E65DEC400F86412 /* Savings */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Savings;
+			sourceTree = "<group>";
+		};
+		EEC9C6A02E65DF7500F86412 /* Onboard */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Onboard;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +119,11 @@
 		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
 			isa = PBXGroup;
 			children = (
-				7AA9945E2E781CAA00E9CAEB /* Savings */,
+				EE2B13CC2E6FA2B20089C289 /* Statistics */,
+				EEE1427A2E65F5BB0045CA28 /* SmartSpendDebug.entitlements */,
+				EEC9C70E2E65EC3100F86412 /* SmartSpendRelease.entitlements */,
+				EEC9C6A02E65DF7500F86412 /* Onboard */,
+				EEC9C69B2E65DEC400F86412 /* Savings */,
 				7AB499172E604F5500DBD5A6 /* User */,
 				7AF92FF12E5FB09600004279 /* Categories */,
 				7AEF4B152E5DAD220050CB92 /* Transactions */,
@@ -150,7 +166,6 @@
 			fileSystemSynchronizedGroups = (
 				7A38C61E2E55BE290030D210 /* Network */,
 				7A38C6272E55ECA20030D210 /* Shared */,
-				7AA9945E2E781CAA00E9CAEB /* Savings */,
 				7AB499172E604F5500DBD5A6 /* User */,
 				7AC367D02E57595F00424841 /* Auth */,
 				7AC367FF2E5C9B9600424841 /* Home */,
@@ -158,6 +173,9 @@
 				7AC3680A2E5C9D5700424841 /* Add */,
 				7AEF4B152E5DAD220050CB92 /* Transactions */,
 				7AF92FF12E5FB09600004279 /* Categories */,
+				EE2B13CC2E6FA2B20089C289 /* Statistics */,
+				EEC9C69B2E65DEC400F86412 /* Savings */,
+				EEC9C6A02E65DF7500F86412 /* Onboard */,
 			);
 			name = SmartSpend;
 			productName = SmartSpend;
@@ -172,7 +190,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					EEB321D92E4CCA7200BD4E77 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -255,7 +273,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = L87YWN3WM4;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -278,7 +295,6 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -318,7 +334,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = L87YWN3WM4;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -334,7 +349,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -346,9 +360,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SmartSpend/SmartSpendDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SmartSpend/Preview Content\"";
+				DEVELOPMENT_TEAM = L87YWN3WM4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartSpend/Info.plist;
@@ -376,9 +392,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SmartSpend/SmartSpendRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SmartSpend/Preview Content\"";
+				DEVELOPMENT_TEAM = L87YWN3WM4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartSpend/Info.plist;

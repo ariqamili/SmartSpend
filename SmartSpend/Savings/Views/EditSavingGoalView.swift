@@ -33,7 +33,7 @@ struct EditSavingGoalView: View {
                     await userVM.fetchUser()
                 }
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .leastNormalMagnitude)
             .padding(10)
             .foregroundStyle(.white)
             .listRowBackground(Color.MainColor)

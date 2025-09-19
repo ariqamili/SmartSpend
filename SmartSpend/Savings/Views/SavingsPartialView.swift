@@ -1,12 +1,13 @@
-//  SavingsPartialView.swift
+//
+//  HomeView.swift
 //  SmartSpend
 //
-//  Created by Refik Jaija on 15.9.25.
+//  Created by shortcut mac on 21.8.25.
 //
+
 import SwiftUI
 
 struct SavingsPartialView: View {
-    
     var text: String = "View More"
     @State var isOnHomeScreen: Bool = true
     @State var showEditSheet: Bool = false
@@ -14,8 +15,8 @@ struct SavingsPartialView: View {
     @EnvironmentObject var transactionVM: TransactionViewModel
     
     var body: some View {
-        @State var goal = userVM.currentUser?.monthly_saving_goal ?? 2000
-        @State var saved = transactionVM.netBalance
+        @State var goal = userVM.currentUser?.monthly_saving_goal ?? 0
+        @State var saved = CGFloat(transactionVM.income - transactionVM.expenses)
         
         VStack{
             VStack(alignment: .leading, spacing: 7) {
@@ -31,39 +32,35 @@ struct SavingsPartialView: View {
                         NavigationLink(text) {
                             SavingFullView()
                                 .environmentObject(userVM)
-                        }
+                            }
                         .foregroundColor(.MainColor)
                         .font(.footnote)
                         .padding(.top)
                         .padding(.trailing)
                     } else {
-                        Button(action:{
+                        Button(text){
                             showEditSheet = true
-                        }, label:{
-                            Text(text)
-                        })
+                        }
                         .foregroundColor(.MainColor)
                         .font(.footnote)
                         .padding(.top)
                         .padding(.trailing)
                     }
+                    
                 }
-                
-                Text("\(userVM.currentUser?.preferred_currency.rawValue ?? "MKD") \(Int(saved))")
+                Text("\(Int(saved)) \(userVM.currentUser?.preferred_currency.rawValue ?? "MKD")")
                     .font(.title)
                     .padding(.top)
-                    
-                let safeGoal = max(CGFloat(goal), 1)
-                let safeSaved = min(max(saved, 0), safeGoal)
-
-                ProgressView(value: safeSaved, total: safeGoal)
+                     
+                ProgressView(value: saved, total: CGFloat(goal))
                     .accentColor(.MainColor)
                     .scaleEffect(x: 1, y: 5)
                     .padding(.bottom)
                     .padding(.trailing)
+                    
             }
             .padding(.leading)
-            
+
             HStack{
                 Text("0 \(userVM.currentUser?.preferred_currency.rawValue ?? "MKD")")
                     .font(.caption)
@@ -85,8 +82,9 @@ struct SavingsPartialView: View {
                 .presentationDetents([.fraction(0.3)])
 
         }
-
     }
+    
+    
 }
 
 #Preview {
@@ -95,4 +93,5 @@ struct SavingsPartialView: View {
             .environmentObject(UserViewModel())
             .environmentObject(TransactionViewModel())
     }
+    
 }
