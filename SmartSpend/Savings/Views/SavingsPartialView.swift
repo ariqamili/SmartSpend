@@ -52,7 +52,12 @@ struct SavingsPartialView: View {
                     .font(.title)
                     .padding(.top)
                      
-                ProgressView(value: saved, total: CGFloat(goal))
+                let goal = max(userVM.currentUser?.monthly_saving_goal ?? 0, 1) 
+                let rawSaved = CGFloat(transactionVM.income - transactionVM.expenses)
+                let saved = max(rawSaved, 0)
+
+                
+                ProgressView(value: min(saved, CGFloat(goal)), total: CGFloat(goal))
                     .accentColor(.MainColor)
                     .scaleEffect(x: 1, y: 5)
                     .padding(.bottom)

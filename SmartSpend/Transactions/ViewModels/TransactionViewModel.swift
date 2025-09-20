@@ -44,64 +44,52 @@ class TransactionViewModel: ObservableObject{
     }
     
     func loadFakeData(){
-         transactions = [
-           Transaction(
-               id: 1,
-               title: "Salary",
-               price: 2500,
-               date_made: Date().addingTimeInterval(-86400 * 1), // 1 day ago
-               category_id: 1,
-               type: .income
-               
-           ),
-           Transaction(
-               id: 2,
-               title: "Bonus",
-               price: 500,
-               date_made: Date().addingTimeInterval(-86400 * 1), // 1 day ago
-               category_id: 2,
-               type: .income
-               
-           ),
-           Transaction(
-               id: 3,
-               title: "Groceries",
-               price: 85.50,
-               date_made: Date().addingTimeInterval(-86400 * 2), // 2 days ago
-               category_id: 3,
-               type: .expense
-               
-           ),
-           Transaction(
-               id: 4,
-               title: "Coffee",
-               price: 3.20,
-               date_made: Date().addingTimeInterval(-3600 * 5), // 5 hours ago
-               category_id: 4,
-               type: .expense
-               
-           ),
-           Transaction(
-               id: 5,
-               title: "Freelance Project Freelance Project",
-               price: 600,
-               date_made: Date().addingTimeInterval(-86400 * 3), // 3 days ago
-               category_id: 5,
-               type: .income
-               
-           ),
-           Transaction(
-               id: 6,
-               title: "Netflix",
-               price: 9.99,
-               date_made: Date().addingTimeInterval(-86400 * 4),
-               category_id: 6,
-               type: .expense
-               
-           )
-       ]
+        let calendar = Calendar.current
+        
+        transactions = [
+            Transaction(
+                id: 1,
+                title: "Salary",
+                price: 2500,
+                date_made: calendar.date(from: DateComponents(year: 2025, month: 1, day: 10))!, // January
+                category_id: 1,
+                type: .income
+            ),
+            Transaction(
+                id: 2,
+                title: "Bonus",
+                price: 500,
+                date_made: calendar.date(from: DateComponents(year: 2025, month: 2, day: 15))!, // February
+                category_id: 2,
+                type: .income
+            ),
+            Transaction(
+                id: 3,
+                title: "Groceries",
+                price: 85.50,
+                date_made: calendar.date(from: DateComponents(year: 2025, month: 2, day: 20))!, // February
+                category_id: 3,
+                type: .expense
+            ),
+            Transaction(
+                id: 4,
+                title: "Coffee",
+                price: 3.20,
+                date_made: calendar.date(from: DateComponents(year: 2025, month: 3, day: 5))!, // March
+                category_id: 4,
+                type: .expense
+            ),
+            Transaction(
+                id: 5,
+                title: "Freelance Project",
+                price: 600,
+                date_made: calendar.date(from: DateComponents(year: 2025, month: 9, day: 17))!, // September
+                category_id: 5,
+                type: .income
+            )
+        ]
     }
-    
+
     
     struct ResponseTransaction: Codable{
        var data: [Transaction]
@@ -146,6 +134,10 @@ class TransactionViewModel: ObservableObject{
     }
     
     
+    struct MessageResponse: Codable {
+        let message: String
+    }
+
     
     
     func addTransaction(title: String, price: Double, date_made: Date, type: Transaction.TransactionType, category_id: Int64? = nil) async -> Bool {
@@ -159,13 +151,12 @@ class TransactionViewModel: ObservableObject{
         )
         
         do {
-            let _: Transaction = try await APIClient.shared.request(
+            let response: MessageResponse = try await APIClient.shared.request(
                 endpoint: "api/transaction",
                 method: "POST",
                 body: newTransaction
             )
-            
-            await fetchTransactionsNoTime()
+            print("Added transaction:", response.message)
             return true
         } catch {
             print("Transaction could not be added:", error)
@@ -235,5 +226,38 @@ class TransactionViewModel: ObservableObject{
 
     
     
+}
+
+
+
+extension TransactionViewModel {
+    struct MonthlyBalance: Identifiable {
+        let id = UUID()
+        let date: Date
+        let balance: Double
+    }
+    
+    var monthlyBalances: [MonthlyBalance] {
+        let calendar = Calendar.current
+        
+        // group all transactions by year+month
+        let grouped = Dictionary(grouping: transactions) { transaction in
+            let comps = calendar.dateComponents([.year, .month], from: transaction.date_made)
+            return comps
+        }
+        
+        // calculate balance per group
+        return grouped.compactMap { comps, txs in
+            guard let year = comps.year, let month = comps.month else { return nil }
+            let firstOfMonth = calendar.date(from: DateComponents(year: year, month: month))!
+            
+            let income = txs.filter { $0.type == .income }.reduce(0) { $0 + $1.price }
+            let expenses = txs.filter { $0.type == .expense }.reduce(0) { $0 + $1.price }
+            
+            return MonthlyBalance(date: firstOfMonth, balance: income - expenses)
+        }
+        // sort by month
+        .sorted { $0.date < $1.date }
+    }
 }
 

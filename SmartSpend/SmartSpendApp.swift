@@ -22,9 +22,13 @@ struct SmartSpendApp: App {
                     ProgressView("Restoring session...") 
                 } else if authVM.isSignedIn && userVM.isOnboarded {
                     StartingScreenView(switchingView: ContentView())
-                } else {
+                } else if !authVM.isSignedIn{
                     StartingScreenView(switchingView: LoginView())
                 }
+                else{
+                    OnboardView()
+                }
+                
             }
             .environmentObject(userVM)
             .environmentObject(categoryVM)

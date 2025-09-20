@@ -18,15 +18,15 @@ struct SavingFullView: View {
             
             HStack {
                 createSavingsPreview(type: "Total Income", value: transactionVM.income, image: "arrow.up.forward.app", color: .green)
-//                    .padding(.trailing, 30)
+
                         
                         Image("verticalLine")
                         .resizable()
                         .frame(width: 1, height: 35)
-                        .padding(.horizontal, 60)
+                        .padding(.horizontal, 40)
                         
                 createSavingsPreview(type: "Total Expense", value: transactionVM.expenses, image: "arrow.down.forward.square", color: .red)
-//                    .padding(.leading, 30)
+
             }
             .padding(.vertical)
             

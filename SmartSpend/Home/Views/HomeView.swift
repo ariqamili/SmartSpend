@@ -1,15 +1,15 @@
-////
-////  HomeView.swift
-////  SmartSpend
-////
-////  Created by Refik Jaija on 17.8.25.
-////
-
+//
+//  HomeView.swift
+//  SmartSpend
+//
+//  Created by Refik Jaija on 17.8.25.
+//
 import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @EnvironmentObject var userVM: UserViewModel
+    @State var showEditSheet: Bool = false
     @EnvironmentObject var transactionVM: TransactionViewModel
     
 
@@ -20,12 +20,24 @@ struct HomeView: View {
                 VStack(spacing: 20) {
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Your Balance")
-                            .font(.caption)
-                            .frame(maxWidth: 370, alignment: .leading)
-                            .foregroundStyle(.gray)
-                        
-//                            .padding(.leading)
+                        HStack{
+                            Text("Your Balance")
+                                .font(.caption)
+                                .frame(maxWidth: 370, alignment: .leading)
+                                .foregroundStyle(.gray)
+                            
+                            Spacer()
+                            
+                            Button("Edit Balance"){
+                                showEditSheet = true
+                            }
+                            .foregroundColor(.MainColor)
+                            .font(.footnote)
+                            .padding(.top)
+                            .padding(.trailing)
+                            
+                        }
+
                         HStack {
                             if viewModel.show {
                                 Text(
@@ -67,6 +79,11 @@ struct HomeView: View {
                     SavingsPartialView(isOnHomeScreen: true)
                     
                     PieChart(isOnHomeView: true)
+                }
+                .sheet(isPresented: $showEditSheet) {
+                    EditBalanceView()
+                        .presentationDetents([.fraction(0.3)])
+
                 }
             }
         }

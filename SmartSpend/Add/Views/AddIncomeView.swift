@@ -59,6 +59,7 @@ struct AddIncomeView: View {
                         let success = await viewModel.AddIncome()
                         if success {
                             alertMessage = "Income added successfully!"
+                            await transactionVM.fetchTransactions()
                             await userVM.fetchUser()
                         } else {
                             alertMessage = "Failed to add income. Try again."

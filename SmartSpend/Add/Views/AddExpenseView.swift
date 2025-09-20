@@ -71,6 +71,7 @@ struct AddExpenseView: View {
                             let success = await viewModel.AddExpense()
                             if success {
                                 alertMessage = "Expense added successfully!"
+                                await transactionVM.fetchTransactions()
                                 await userVM.fetchUser()
                             } else {
                                 alertMessage = "Failed to add expense. Try again."
