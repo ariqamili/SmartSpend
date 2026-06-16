@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 90;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A657E4D2E52760A00B099F1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4C2E52760A00B099F1 /* GoogleSignIn */; };
+		7A657E4F2E52760A00B099F1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A657E4E2E52760A00B099F1 /* GoogleSignInSwift */; };
+		EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */; };
+		EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */; };
+		EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */; };
+		EEB321E52E4CCA7400BD4E77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7A657E4A2E52746100B099F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSpend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSpendApp.swift; sourceTree = "<group>"; };
+		EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EEC9C70E2E65EC3100F86412 /* SmartSpendRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSpendRelease.entitlements; sourceTree = "<group>"; };
+		EEE1427A2E65F5BB0045CA28 /* SmartSpendDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartSpendDebug.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7A38C61E2E55BE290030D210 /* Network */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7A38C6272E55ECA20030D210 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		7AB499172E604F5500DBD5A6 /* User */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = User;
+			sourceTree = "<group>";
+		};
+		7AC367D02E57595F00424841 /* Auth */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		7AC367FF2E5C9B9600424841 /* Home */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7AC368062E5C9D1300424841 /* Account */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Account;
+			sourceTree = "<group>";
+		};
+		7AC3680A2E5C9D5700424841 /* Add */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Add;
+			sourceTree = "<group>";
+		};
+		7AEF4B152E5DAD220050CB92 /* Transactions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Transactions;
+			sourceTree = "<group>";
+		};
+		7AF92FF12E5FB09600004279 /* Categories */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		EE2B13CC2E6FA2B20089C289 /* Statistics */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		EEC9C69B2E65DEC400F86412 /* Savings */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Savings;
+			sourceTree = "<group>";
+		};
+		EEC9C6A02E65DF7500F86412 /* Onboard */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Onboard;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EEB321D72E4CCA7200BD4E77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				7A657E4D2E52760A00B099F1 /* GoogleSignIn in Frameworks */,
+				7A657E4F2E52760A00B099F1 /* GoogleSignInSwift in Frameworks */,
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EEB321D12E4CCA7200BD4E77 = {
+			isa = PBXGroup;
+			children = (
+				EEB321DC2E4CCA7200BD4E77 /* SmartSpend */,
+				EEB321DB2E4CCA7200BD4E77 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EEB321DB2E4CCA7200BD4E77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EEB321DC2E4CCA7200BD4E77 /* SmartSpend */ = {
+			isa = PBXGroup;
+			children = (
+				EE2B13CC2E6FA2B20089C289 /* Statistics */,
+				EEE1427A2E65F5BB0045CA28 /* SmartSpendDebug.entitlements */,
+				EEC9C70E2E65EC3100F86412 /* SmartSpendRelease.entitlements */,
+				EEC9C6A02E65DF7500F86412 /* Onboard */,
+				EEC9C69B2E65DEC400F86412 /* Savings */,
+				7AB499172E604F5500DBD5A6 /* User */,
+				7AF92FF12E5FB09600004279 /* Categories */,
+				7AEF4B152E5DAD220050CB92 /* Transactions */,
+				7AC3680A2E5C9D5700424841 /* Add */,
+				7AC368062E5C9D1300424841 /* Account */,
+				7AC367FF2E5C9B9600424841 /* Home */,
+				7AC367D02E57595F00424841 /* Auth */,
+				7A38C6272E55ECA20030D210 /* Shared */,
+				7A38C61E2E55BE290030D210 /* Network */,
+				7A657E4A2E52746100B099F1 /* Info.plist */,
+				EEB321DD2E4CCA7200BD4E77 /* SmartSpendApp.swift */,
+				EEB321DF2E4CCA7200BD4E77 /* ContentView.swift */,
+				EEB321E12E4CCA7400BD4E77 /* Assets.xcassets */,
+				EEB321E32E4CCA7400BD4E77 /* Preview Content */,
+			);
+			path = SmartSpend;
+			sourceTree = "<group>";
+		};
+		EEB321E32E4CCA7400BD4E77 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EEB321E42E4CCA7400BD4E77 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EEB321D92E4CCA7200BD4E77 /* SmartSpend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEB321E82E4CCA7400BD4E77 /* Build configuration list for PBXNativeTarget "SmartSpend" */;
+			buildPhases = (
+				EEB321D62E4CCA7200BD4E77 /* Sources */,
+				EEB321D72E4CCA7200BD4E77 /* Frameworks */,
+				EEB321D82E4CCA7200BD4E77 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				7A38C61E2E55BE290030D210 /* Network */,
+				7A38C6272E55ECA20030D210 /* Shared */,
+				7AB499172E604F5500DBD5A6 /* User */,
+				7AC367D02E57595F00424841 /* Auth */,
+				7AC367FF2E5C9B9600424841 /* Home */,
+				7AC368062E5C9D1300424841 /* Account */,
+				7AC3680A2E5C9D5700424841 /* Add */,
+				7AEF4B152E5DAD220050CB92 /* Transactions */,
+				7AF92FF12E5FB09600004279 /* Categories */,
+				EE2B13CC2E6FA2B20089C289 /* Statistics */,
+				EEC9C69B2E65DEC400F86412 /* Savings */,
+				EEC9C6A02E65DF7500F86412 /* Onboard */,
+			);
+			name = SmartSpend;
+			productName = SmartSpend;
+			productReference = EEB321DA2E4CCA7200BD4E77 /* SmartSpend.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EEB321D22E4CCA7200BD4E77 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					EEB321D92E4CCA7200BD4E77 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = EEB321D52E4CCA7200BD4E77 /* Build configuration list for PBXProject "SmartSpend" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EEB321D12E4CCA7200BD4E77;
+			packageReferences = (
+				7A657E4B2E52760A00B099F1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
+			preferredProjectObjectVersion = 90;
+			productRefGroup = EEB321DB2E4CCA7200BD4E77 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EEB321D92E4CCA7200BD4E77 /* SmartSpend */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEB321D82E4CCA7200BD4E77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+				EEB321E52E4CCA7400BD4E77 /* Preview Assets.xcassets in Resources */,
+				EEB321E22E4CCA7400BD4E77 /* Assets.xcassets in Resources */,
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EEB321D62E4CCA7200BD4E77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				EEB321E02E4CCA7200BD4E77 /* ContentView.swift in Sources */,
+				EEB321DE2E4CCA7200BD4E77 /* SmartSpendApp.swift in Sources */,
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EEB321E62E4CCA7400BD4E77 /* Debug configuration for PBXProject "SmartSpend" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EEB321E72E4CCA7400BD4E77 /* Release configuration for PBXProject "SmartSpend" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EEB321E92E4CCA7400BD4E77 /* Debug configuration for PBXNativeTarget "SmartSpend" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SmartSpend/SmartSpendDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SmartSpend/Preview Content\"";
+				DEVELOPMENT_TEAM = L87YWN3WM4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartSpend/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ShortcutBalkans.SmartSpend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EEB321EA2E4CCA7400BD4E77 /* Release configuration for PBXNativeTarget "SmartSpend" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SmartSpend/SmartSpendRelease.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SmartSpend/Preview Content\"";
+				DEVELOPMENT_TEAM = L87YWN3WM4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SmartSpend/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ShortcutBalkans.SmartSpend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EEB321D52E4CCA7200BD4E77 /* Build configuration list for PBXProject "SmartSpend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB321E62E4CCA7400BD4E77 /* Debug configuration for PBXProject "SmartSpend" */,
+				EEB321E72E4CCA7400BD4E77 /* Release configuration for PBXProject "SmartSpend" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		EEB321E82E4CCA7400BD4E77 /* Build configuration list for PBXNativeTarget "SmartSpend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB321E92E4CCA7400BD4E77 /* Debug configuration for PBXNativeTarget "SmartSpend" */,
+				EEB321EA2E4CCA7400BD4E77 /* Release configuration for PBXNativeTarget "SmartSpend" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7A657E4B2E52760A00B099F1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7A657E4C2E52760A00B099F1 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A657E4B2E52760A00B099F1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		7A657E4E2E52760A00B099F1 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A657E4B2E52760A00B099F1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = EEB321D22E4CCA7200BD4E77 /* Project object */;
+}
