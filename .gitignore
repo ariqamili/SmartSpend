@@ -1,16 +1,43 @@
-# macOS
+# macOS system files
 .DS_Store
 
-# Xcode
-DerivedData/
+# Xcode build files
 build/
-
-# User settings
-xcuserdata/
+DerivedData/
 *.xcuserstate
+*.xcuserdata
+
+# Xcode project settings (user-specific)
+*.xccheckout
+*.moved-aside
 
 # Swift Package Manager
 .build/
 
-# Secrets
+# CocoaPods (if ever used)
+Pods/
+Podfile.lock
+
+# Carthage (if ever used)
+Carthage/Build/
+
+# Archives
+*.xcarchive
+
+# Logs
+*.log
+
+# Secrets / environment files
 .env
+*.env
+
+# Patch / temporary files
+patch.diff
+
+# IDE
+.idea/
+.vscode/
+
+# Swift Playgrounds
+timeline.xctimeline
+playground.xcworkspace
